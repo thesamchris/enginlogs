@@ -1,4 +1,5 @@
-import app from 'firebase/app' 
+import app from 'firebase/app'
+import 'firebase/database' 
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -12,7 +13,14 @@ const config = {
 class Firebase {
     constructor() {
         app.initializeApp(config)
+        this.db = app.database()
     }
+
+    initial = () => this.db.ref('initial')
+
+    loanList = () => this.db.ref('loanList')
+
+    loanTo = () => this.db.ref('loanTo')
 }
 
 export default Firebase
