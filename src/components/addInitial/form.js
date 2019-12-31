@@ -13,7 +13,7 @@ class AddIntialForm extends React.Component {
             name: 'Blue Plastic Balls',
             quantity: 68
         }
-       newItemRef.set(...newItem)
+       newItemRef.set({...newItem})
     }
 
     render() {
