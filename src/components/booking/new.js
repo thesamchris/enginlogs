@@ -20,6 +20,7 @@ class NewBooking extends Component {
     newBooking(e) {
         e.preventDefault()
         // let newBookingRef = this.props.booking()
+        return console.log('new booking wooooo!')
         let newBooking = {
             collectionDate: this.state.collectionDate,
             returnDate: this.state.returnDate
@@ -43,6 +44,7 @@ class NewBooking extends Component {
         }
     }
 
+
     updateState(e) {
         let { id, value } = e.target
         this.setState({
@@ -52,6 +54,8 @@ class NewBooking extends Component {
 
     render() {
         let { error, message } = this.state
+        let { setBookingDetails, selectedItems, collectionDate, returnDate, email } = this.props
+        let isAllowedToMakeFinalBooking = (selectedItems && collectionDate && returnDate && email)
         return (
             <div>
                 {error ? <h1>{ message }</h1> : ''}
@@ -76,11 +80,9 @@ class NewBooking extends Component {
                     value={this.state.email}
                     type="email" />
 
-                items
-                quantity of each item
-
                 
-                <button onClick={this.newBooking}>new booking!</button>
+                <button onClick={() => setBookingDetails(this.state.collectionDate, this.state.returnDate, this.state.email)}>set booking details!</button>
+                <button disabled={!isAllowedToMakeFinalBooking} onClick={this.newBooking}>make booking!</button>
             </div>
         )
     }
