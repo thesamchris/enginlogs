@@ -18,6 +18,7 @@ class Firebase {
 
     initial = () => this.db.ref('initial')
 
+
     loanList = () => this.db.ref('loanList')
 
     loanTo = () => this.db.ref('loanTo')
