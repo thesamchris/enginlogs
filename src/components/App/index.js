@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import { withFirebase } from '../Firebase/context'
 import AddInitial from '../addInitial'
-import ShowItems from '../showItems'
-import NewBooking from '../booking/new'
+import Details from '../booking/details'
 import Cart from '../booking/cart'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Display from '../items/display'
@@ -74,7 +73,7 @@ class App extends Component {
 							<div>for add initial item, add functionality to add category</div>
 						</Route>
 						<Route path="/details">
-							<NewBooking
+							<Details
 								selectedItems={selectedItems}
 								collectionDate={collectionDate}
 								returnDate={returnDate}

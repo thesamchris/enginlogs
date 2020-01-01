@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { withFirebase } from '../Firebase/context'
 import { withRouter } from 'react-router-dom'
 
-class NewBooking extends Component {
+class Details extends Component {
 	constructor() {
 		super()
 		this.state = {
 			collectionDate: '',
 			returnDate: '',
-			items: {},
 			email: '',
 			error: false,
 			message: ''
@@ -17,15 +16,10 @@ class NewBooking extends Component {
 		this.updateState = this.updateState.bind(this)
 	}
 
-	validateDateRange() {
-		let newBooking = {
-			collectionDate: this.props.collectionDate,
-			returnDate: this.props.returnDate,
-			selectedItems: this.props.selectedItems,
-			email: this.props.email
-		}
-		let collectionDate = new Date(newBooking.collectionDate)
-		let returnDate = new Date(newBooking.returnDate)
+	validateDateRange(e) {
+		e.preventDefault()
+		let collectionDate = new Date(this.state.collectionDate)
+		let returnDate = new Date(this.state.returnDate)
 		let numberOfDays = 0
 		let i
 		for (i = collectionDate; i < returnDate; i.setDate(i.getDate() + 1)) {
@@ -33,8 +27,6 @@ class NewBooking extends Component {
 			if (numberOfDays > 7) {
 				break
 			}
-
-			// for each day, take away {quantity} of each {item}
 		}
 
 		if (numberOfDays > 7) {
@@ -62,15 +54,6 @@ class NewBooking extends Component {
 
 	render() {
 		let { error, message } = this.state
-		let {
-			setBookingDetails,
-			selectedItems,
-			collectionDate,
-			returnDate,
-			email
-		} = this.props
-		let isAllowedToMakeFinalBooking =
-			selectedItems && collectionDate && returnDate && email
 		return (
 			<div>
 				{error ? <h1>{message}</h1> : ''}
@@ -106,4 +89,4 @@ class NewBooking extends Component {
 	}
 }
 
-export default withRouter(withFirebase(NewBooking))
+export default withRouter(withFirebase(Details))
