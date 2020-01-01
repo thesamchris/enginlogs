@@ -18,10 +18,15 @@ class Firebase {
 
     initial = () => this.db.ref('initial')
 
+    loaners = () => this.db.ref('loaners')
 
-    loanList = () => this.db.ref('loanList')
+    loaner = (telegramHandle) => this.db.ref('loaners').child(telegramHandle)
 
-    loanTo = () => this.db.ref('loanTo')
+    bookItem = (uid, day) => this.db.ref('initial').child(uid).child('bookings').child(day)
+
+    bookings = () => this.db.ref('bookings')
+
+    particularBooking = (uid) => this.db.ref('bookings').child(uid) 
 }
 
 export default Firebase
