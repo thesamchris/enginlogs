@@ -16,8 +16,8 @@ class App extends Component {
 			collectionDate: '',
 			returnDate: '',
 			email: '',
-      items: {},
-      loading: false
+			items: {},
+			loading: false
 		}
 		this.selectItem = this.selectItem.bind(this)
 		this.setBookingDetails = this.setBookingDetails.bind(this)
@@ -52,7 +52,14 @@ class App extends Component {
 	}
 
 	render() {
-		let { selectedItems, collectionDate, returnDate, email, items, loading } = this.state
+		let {
+			selectedItems,
+			collectionDate,
+			returnDate,
+			email,
+			items,
+			loading
+		} = this.state
 		let haveDateRange = collectionDate && returnDate
 		return (
 			<Router>
@@ -81,9 +88,9 @@ class App extends Component {
 								selectedItems={selectedItems}
 								collectionDate={collectionDate}
 								returnDate={returnDate}
-                haveDateRange={haveDateRange}
-                items={items}
-                loading={loading}
+								haveDateRange={haveDateRange}
+								items={items}
+								loading={loading}
 							/>
 						</Route>
 						<Route path="/bookings">
@@ -98,11 +105,11 @@ class App extends Component {
               <ShowItems /> */}
 						</Route>
 						<Route path="/loan">
-							<Display selectItem={this.selectItem} selectable={true} />
+							<Display collectionDate={collectionDate} returnDate={returnDate} selectItem={this.selectItem} selectable={true} />
 						</Route>
 						<Route path="/">
 							<Link to="/view">view</Link>
-							<Link to="/loan">loan</Link>
+							<Link to="/details">loan</Link>
 						</Route>
 					</Switch>
 				</div>

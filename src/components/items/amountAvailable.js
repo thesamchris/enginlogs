@@ -1,4 +1,4 @@
-const amountAvailable = (itemData, collectionDate, returnDate, haveDateRange) => {
+const amountAvailable = (itemData, collectionDate, returnDate) => {
     let lowestAmountAvailable = itemData.quantity
     let amountAvailableForDay, amountBookedForDay
     if (itemData.bookings) {

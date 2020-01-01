@@ -1,5 +1,6 @@
 import React,  { Component } from 'react'
 import { withFirebase } from '../Firebase/context'
+import { withRouter } from 'react-router-dom'
 
 class NewBooking extends Component {
     constructor() {
@@ -14,6 +15,7 @@ class NewBooking extends Component {
 
         }
         this.validateDateRange = this.validateDateRange.bind(this)
+        this.setDetailsAndRedirect = this.setDetailsAndRedirect.bind(this)
         this.newBooking = this.newBooking.bind(this)
         this.updateState = this.updateState.bind(this)
     }
@@ -71,6 +73,10 @@ class NewBooking extends Component {
         })
     }
 
+    setDetailsAndRedirect() {
+        this.props.setBookingDetails(this.state.collectionDate, this.state.returnDate, this.state.email)
+        return this.props.history.push('/loan')
+    }
 
     updateState(e) {
         let { id, value } = e.target
@@ -108,11 +114,11 @@ class NewBooking extends Component {
                     type="email" />
 
                 
-                <button onClick={() => setBookingDetails(this.state.collectionDate, this.state.returnDate, this.state.email)}>set booking details!</button>
-                <button disabled={!isAllowedToMakeFinalBooking} onClick={this.validateDateRange}>make booking!</button>
+                <button onClick={this.setDetailsAndRedirect}>set booking details!</button>
+                {/* <button disabled={!isAllowedToMakeFinalBooking} onClick={this.validateDateRange}>make booking!</button> */}
             </div>
         )
     }
 }
 
-export default withFirebase(NewBooking)
+export default withRouter(withFirebase(NewBooking))
