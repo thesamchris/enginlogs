@@ -1,56 +1,114 @@
 import React, { Component } from 'react'
-// import './App.css'
+import './App.css'
+import { withFirebase } from '../Firebase/context'
 import AddInitial from '../addInitial'
 import ShowItems from '../showItems'
 import NewBooking from '../booking/new'
-import SelectItems from '../booking/selectItems'
+import Cart from '../booking/cart'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import Display from '../items/display'
 
 class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      selectedItems: {},
-      collectionDate: '',
-      returnDate: '',
-      email: ''
-    }
-    this.selectItem = this.selectItem.bind(this)
-    this.setBookingDetails = this.setBookingDetails.bind(this)
-  }
+	constructor() {
+		super()
+		this.state = {
+			selectedItems: {},
+			collectionDate: '',
+			returnDate: '',
+			email: '',
+      items: {},
+      loading: false
+		}
+		this.selectItem = this.selectItem.bind(this)
+		this.setBookingDetails = this.setBookingDetails.bind(this)
+	}
 
-  selectItem(key, quantity) {
-    this.setState({
-      selectedItems: {
-        ...this.state.selectedItems,
-        [key]: quantity
-      }
-    })
-  }
+	componentDidMount() {
+		this.setState({ loading: true })
 
-  setBookingDetails(collectionDate, returnDate, email) {
-    this.setState({
-      collectionDate,
-      returnDate,
-      email
-    })
-  }
+		this.props.firebase.initial().on('value', snap => {
+			this.setState({
+				loading: false,
+				items: snap.val()
+			})
+		})
+	}
 
-  render() {
-    let { selectedItems, collectionDate, returnDate, email } = this.state
-    let haveDateRange = collectionDate && returnDate
-    return (
-      <div className="App">
-        <AddInitial />
-        <div>for add initial item, add functionality to add category</div>
-        <div>show items (add functionality to show amount based on date selected, filterbased on category as well please)</div>
-        <ShowItems />
-        <div>add booking</div>
-        <SelectItems selectItem={this.selectItem} collectionDate={collectionDate} returnDate={returnDate} haveDateRange={haveDateRange}/>
-        <NewBooking selectedItems={selectedItems} collectionDate={collectionDate} returnDate={returnDate} email={email} setBookingDetails={this.setBookingDetails}/>
-        <div>show bookings</div>
-      </div>
-    )
-  }
+	selectItem(key, quantity) {
+		this.setState({
+			selectedItems: {
+				...this.state.selectedItems,
+				[key]: quantity
+			}
+		})
+	}
+
+	setBookingDetails(collectionDate, returnDate, email) {
+		this.setState({
+			collectionDate,
+			returnDate,
+			email
+		})
+	}
+
+	render() {
+		let { selectedItems, collectionDate, returnDate, email, items, loading } = this.state
+		let haveDateRange = collectionDate && returnDate
+		return (
+			<Router>
+				<div className="app">
+					<nav>
+						<Link to="/">home</Link>
+						<Link to="/cart">cart</Link>
+					</nav>
+					<Switch>
+						<Route path="/add">
+							<AddInitial />
+							<div>for add initial item, add functionality to add category</div>
+						</Route>
+						<Route path="/details">
+							<NewBooking
+								selectedItems={selectedItems}
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								email={email}
+								setBookingDetails={this.setBookingDetails}
+							/>
+						</Route>
+						<Route path="/cart">
+							<Cart
+								selectItem={this.selectItem}
+								selectedItems={selectedItems}
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+                haveDateRange={haveDateRange}
+                items={items}
+                loading={loading}
+							/>
+						</Route>
+						<Route path="/bookings">
+							<div>show bookings</div>
+						</Route>
+						<Route path="/view">
+							<Display selectable={false} />
+							{/* <div>
+                show items (add functionality to show amount based on date
+                selected, filterbased on category as well please)
+              </div>
+              <ShowItems /> */}
+						</Route>
+						<Route path="/loan">
+							<Display selectItem={this.selectItem} selectable={true} />
+						</Route>
+						<Route path="/">
+							<Link to="/view">view</Link>
+							<Link to="/loan">loan</Link>
+						</Route>
+					</Switch>
+				</div>
+			</Router>
+		)
+	}
 }
 
-export default App;
+export default withFirebase(App)
