@@ -21,14 +21,14 @@ class SelectItem extends Component {
     }
     
     render() {
-        let { itemData, id, selectItem, collectionDate, returnDate } = this.props
+        let { itemData, id, selectItem, collectionDate, returnDate, haveDateRange } = this.props
         return (
             <div>
                 {itemData.name}
                 {id}
                 <input onChange={this.updateState} id="quantity" type="number" value={this.state.quantity} placeholder="0" max={itemData.quantity} />
                 <button onClick={() => selectItem(id, this.state.quantity)}>Select</button>
-                there are { amountAvailable(itemData, collectionDate, returnDate) } of { itemData.quantity } available
+                { haveDateRange ? `there are ${amountAvailable(itemData, collectionDate, returnDate, haveDateRange)} of ${itemData.quantity} available` : ''}
             </div>
         )
     }

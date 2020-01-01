@@ -28,7 +28,7 @@ class SelectItems extends Component {
         let { collectionDate, returnDate } = this.props
         let itemElements
         if (items) {
-            itemElements = Object.keys(items).map(key => <SelectItem key={key} id={key} collectionDate={collectionDate} returnDate={returnDate} itemData={items[key]} selectItem={this.props.selectItem}/>)
+            itemElements = Object.keys(items).map(key => <SelectItem key={key} id={key} collectionDate={collectionDate} returnDate={returnDate} itemData={items[key]} selectItem={this.props.selectItem} haveDateRange={this.props.haveDateRange}/>)
         }
         return (
             <div>

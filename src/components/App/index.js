@@ -37,6 +37,7 @@ class App extends Component {
 
   render() {
     let { selectedItems, collectionDate, returnDate, email } = this.state
+    let haveDateRange = collectionDate && returnDate
     return (
       <div className="App">
         <AddInitial />
@@ -44,7 +45,7 @@ class App extends Component {
         <div>show items (add functionality to show amount based on date selected, filterbased on category as well please)</div>
         <ShowItems />
         <div>add booking</div>
-        <SelectItems selectItem={this.selectItem} collectionDate={collectionDate} returnDate={returnDate} />
+        <SelectItems selectItem={this.selectItem} collectionDate={collectionDate} returnDate={returnDate} haveDateRange={haveDateRange}/>
         <NewBooking selectedItems={selectedItems} collectionDate={collectionDate} returnDate={returnDate} email={email} setBookingDetails={this.setBookingDetails}/>
         <div>show bookings</div>
       </div>
