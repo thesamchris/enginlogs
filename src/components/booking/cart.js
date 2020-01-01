@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withFirebase } from '../Firebase/context'
 import CartItem from './cartItem'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 class Cart extends Component {
 	constructor(props) {
@@ -73,15 +73,20 @@ class Cart extends Component {
 		return (
 			<div>
 				<h1>Cart</h1>
+				<p>
+					<Link to="/loan">select more items</Link>
+				</p>
 				{loading ? 'loading' : ''}
 				{haveItemsInCart ? itemElements : 'please select some items'}
 				{haveItemsInCart ? (
 					<button
-						onClick={() => this.newBooking(
-							new Date(collectionDate),
-							new Date(returnDate),
-							newBooking
-						)}
+						onClick={() =>
+							this.newBooking(
+								new Date(collectionDate),
+								new Date(returnDate),
+								newBooking
+							)
+						}
 					>
 						Confirm Booking
 					</button>
