@@ -22,15 +22,24 @@ class CartItem extends Component {
     
     render() {
         let { itemData, id, selectItem, collectionDate, returnDate, haveDateRange } = this.props
+        let maxValue = amountAvailable(itemData, collectionDate, returnDate)
         return (
-            <div>
-                {itemData.name}
-                {id}
-                <input onChange={this.updateState} id="quantity" type="number" value={this.state.quantity} placeholder="0" max={itemData.quantity} />
-                <button onClick={() => selectItem(id, this.state.quantity)}>Select</button>
-                { haveDateRange ? `there are ${amountAvailable(itemData, collectionDate, returnDate)} of ${itemData.quantity} available` : ''}
-            </div>
-        )
+					<div>
+						<p>{itemData.name}</p>
+						<input
+							onChange={this.props.onChange}
+							id={id}
+							type="number"
+							value={this.props.selectedItems[id]}
+							placeholder="0"
+                            max={maxValue}
+                            min={0}
+						/>
+						{haveDateRange
+							? `there are ${maxValue} of ${itemData.quantity} available`
+							: ''}
+					</div>
+				)
     }
 } 
 

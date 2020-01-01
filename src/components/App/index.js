@@ -91,6 +91,7 @@ class App extends Component {
 								haveDateRange={haveDateRange}
 								items={items}
 								loading={loading}
+								email={email}
 							/>
 						</Route>
 						<Route path="/bookings">
@@ -111,6 +112,9 @@ class App extends Component {
 								selectItem={this.selectItem}
 								selectable={true}
 							/>
+						</Route>
+						<Route path="/success">
+							<p>Successful booking! thanks!</p>
 						</Route>
 						<Route path="/">
 							<div className="buttonsContainer">
