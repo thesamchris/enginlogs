@@ -105,11 +105,22 @@ class App extends Component {
               <ShowItems /> */}
 						</Route>
 						<Route path="/loan">
-							<Display collectionDate={collectionDate} returnDate={returnDate} selectItem={this.selectItem} selectable={true} />
+							<Display
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								selectItem={this.selectItem}
+								selectable={true}
+							/>
 						</Route>
 						<Route path="/">
-							<Link to="/view">view</Link>
-							<Link to="/details">loan</Link>
+							<div className="buttonsContainer">
+								<Link className="homeButton" to="/view">
+									view
+								</Link>
+								<Link className="homeButton" to="/details">
+									loan
+								</Link>
+							</div>
 						</Route>
 					</Switch>
 				</div>
