@@ -44,7 +44,7 @@ class App extends Component {
         <div>show items (add functionality to show amount based on date selected, filterbased on category as well please)</div>
         <ShowItems />
         <div>add booking</div>
-        <SelectItems selectItem={this.selectItem} />
+        <SelectItems selectItem={this.selectItem} collectionDate={collectionDate} returnDate={returnDate} />
         <NewBooking selectedItems={selectedItems} collectionDate={collectionDate} returnDate={returnDate} email={email} setBookingDetails={this.setBookingDetails}/>
         <div>show bookings</div>
       </div>
