@@ -8,39 +8,48 @@ class Display extends Component {
 		super(props)
 		this.state = {
 			loading: false,
-			items: {}
+			itemKeys: {}
 		}
+
+		this.categoryItems = this.categoryItems.bind(this)
 	}
 
 	componentDidMount() {
 		this.setState({ loading: true })
-
-		this.props.firebase.initial().on('value', snap => {
+		this.props.firebase.initial().orderByChild('category').equalTo(this.props.category).on('child_added', snap => {
 			this.setState({
 				loading: false,
-				items: snap.val()
+				itemKeys: {
+					...this.state.itemKeys,
+					[snap.key]: true
+				}
 			})
 		})
 	}
 
+	categoryItems(itemKeys, items) {
+		return Object.keys(itemKeys).map(key => items[key] ? items[key] : {})
+	}
+
 	render() {
-		let { selectable, selectItem, collectionDate, returnDate } = this.props
-		let { loading, items } = this.state
+		let { selectable, selectItem, collectionDate, returnDate, items, category } = this.props
+		let { loading, itemKeys } = this.state
 		let toDisplay
-		if (!items) {
+		if (!items && !itemKeys) {
 			toDisplay = 'no items'
-		} else if (items && !selectable) {
-			toDisplay = <View items={items} />
-		} else if (items && selectable) {
+		} else if (items && itemKeys && !selectable) {
+			toDisplay = (
+				<View category={category} items={this.categoryItems(itemKeys, items)} />
+			)
+		} else if (items && itemKeys && selectable) {
 			toDisplay = <Loan collectionDate={collectionDate} returnDate={returnDate} selectItem={selectItem} items={items} />
 		}
 
-		if (items) {
-		}
+		
 		return (
 			<div>
-				{loading ? 'loading' : ''}
 				{toDisplay}
+				{loading ? 'loading' : ''}
 			</div>
 		)
 	}

@@ -1,8 +1,10 @@
 import React from 'react'
 
-const View = ({ items }) => {
-    let itemElements = Object.keys(items).map(key => {
-      let item = items[key];
+const View = ({ items, category }) => {
+    if (!items) {
+      return null
+    }
+    let itemElements = items.map((item, key) => {
       return (
         <li key={key}>
           {item.name}, raw quantity is {item.quantity}
@@ -11,7 +13,7 @@ const View = ({ items }) => {
     })
     return (
         <div>
-            <h1>All Items</h1>
+            <h1>{ category }</h1>
             <ul>
                 { itemElements }
             </ul>
