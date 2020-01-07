@@ -5,7 +5,8 @@ class AddIntialForm extends React.Component {
         super()
         this.state = {
             itemName: '',
-            itemQuantity: ''
+            itemQuantity: '',
+            category: 'camp'
         }
         this.addNewItem = this.addNewItem.bind(this)
         this.updateState = this.updateState.bind(this)
@@ -16,9 +17,11 @@ class AddIntialForm extends React.Component {
         let newItemRef = this.props.initialRef.push()
         let newItem = {
             name: this.state.itemName,
-            quantity: this.state.itemQuantity
+            quantity: this.state.itemQuantity,
+            category: this.state.category
         }
-       newItemRef.set({...newItem})
+
+        newItemRef.set({...newItem})
     }
 
     updateState(e) {
@@ -33,6 +36,12 @@ class AddIntialForm extends React.Component {
             <div>
                 <input id="itemName" onChange={this.updateState} placeholder="Name" value={this.state.itemName}/>
                 <input id="itemQuantity" placeholder="Quantity" type="number" onChange={this.updateState} value={this.state.itemQuantity}/>
+                <select id="category" onChange={this.updateState} value={this.state.category}>
+                    <option value="camp">Camp</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="sports">Sport</option>
+                    <option value="misc">Misc</option>
+                </select>
                 <button onClick={this.addNewItem}>add item!</button>
             </div>
         )
