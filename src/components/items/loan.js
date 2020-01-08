@@ -8,7 +8,7 @@ class Loan extends Component {
 		let isAllowedToSelectItems = collectionDate && returnDate
 		let elements
 
-		let itemElements = Object.keys(items).map(key => {
+		let itemElements = items.map(key => {
 			let item = items[key]
 			return (
 				<li key={key}>
