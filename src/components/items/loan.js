@@ -4,20 +4,22 @@ import { Link } from 'react-router-dom'
 
 class Loan extends Component {
 	render() {
-		let { items, selectItem, collectionDate, returnDate } = this.props
+		let { items, selectItem, collectionDate, returnDate, itemKeys } = this.props
 		let isAllowedToSelectItems = collectionDate && returnDate
 		let elements
-
-		let itemElements = items.map(key => {
-			let item = items[key]
+		if (!items) {
+			return null
+		}
+		let itemElements = items.map((item, key) => {
+			let uid = Object.keys(itemKeys)[key]
 			return (
-				<li key={key}>
+				<li key={uid}>
 					<p>{item.name}</p>
 					<p>
 						{amountAvailable(item, collectionDate, returnDate)} of{' '}
 						{item.quantity} available
 					</p>
-					<button onClick={() => selectItem(key, 0)}>+</button>
+					<button onClick={() => selectItem(uid, 0)}>+</button>
 				</li>
 			)
 		})

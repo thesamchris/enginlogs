@@ -42,7 +42,15 @@ class Display extends Component {
 				<View category={category} items={this.categoryItems(itemKeys, items)} />
 			)
 		} else if (items && itemKeys && selectable) {
-			toDisplay = <Loan collectionDate={collectionDate} returnDate={returnDate} selectItem={selectItem} items={items} />
+			toDisplay = (
+				<Loan
+					collectionDate={collectionDate}
+					returnDate={returnDate}
+					selectItem={selectItem}
+					items={this.categoryItems(itemKeys, items)}
+					itemKeys={itemKeys}
+				/>
+			)
 		}
 
 		

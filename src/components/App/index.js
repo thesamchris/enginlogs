@@ -100,7 +100,11 @@ class App extends Component {
 							<Display items={items} category="sports" selectable={false} />
 						</Route>
 						<Route path="/view/electronics">
-							<Display items={items} category="electronics" selectable={false} />
+							<Display
+								items={items}
+								category="electronics"
+								selectable={false}
+							/>
 						</Route>
 						<Route path="/view/camp">
 							<Display items={items} category="camp" selectable={false} />
@@ -108,13 +112,59 @@ class App extends Component {
 						<Route path="/view/misc">
 							<Display items={items} category="misc" selectable={false} />
 						</Route>
+						<Route path="/loan/sports">
+							<Display
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								selectItem={this.selectItem}
+								selectable={true}
+								category="sports"
+								items={items}
+							/>
+						</Route>
+						<Route path="/loan/electronics">
+							<Display
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								selectItem={this.selectItem}
+								selectable={true}
+								category="electronics"
+								items={items}
+							/>
+						</Route>
+						<Route path="/loan/camp">
+							<Display
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								selectItem={this.selectItem}
+								selectable={true}
+								category="camp"
+								items={items}
+							/>
+						</Route>
+						<Route path="/loan/misc">
+							<Display
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								selectItem={this.selectItem}
+								selectable={true}
+								category="misc"
+								items={items}
+							/>
+						</Route>
+						<Route path="/loan">
+							<Link to="/loan/sports">Sports</Link>
+							<Link to="/loan/electronics">Electronics</Link>
+							<Link to="/loan/camp">Camp</Link>
+							<Link to="/loan/misc">Misc</Link>
+						</Route>
 						<Route path="/view">
 							<Link to="/view/sports">Sports</Link>
 							<Link to="/view/electronics">Electronics</Link>
 							<Link to="/view/camp">Camp</Link>
 							<Link to="/view/misc">Misc</Link>
 						</Route>
-						
+
 						<Route path="/loan">
 							<Display
 								collectionDate={collectionDate}
