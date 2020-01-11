@@ -14,6 +14,26 @@ html {
   -webkit-text-size-adjust: 100%; /* 2 */
   font-family: 'Poppins', sans-serif;
   --gold-dark: #93803b;
+  color: var(--gold-dark);
+}
+
+
+/* shared style */
+
+input {
+  width: 220px;
+}
+
+.input__container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input__label {
+  text-transform: uppercase;
+  margin: 10px 0;
+  font-size: 13px;
 }
 
 .link__space {

@@ -17,3 +17,16 @@
   justify-content: center;
   align-items: center;
 }
+
+.button {
+  text-decoration: none;
+  color: white;
+  background: var(--gold-dark);
+  padding: 10px 20px;
+  margin: 29px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 6px rgba(0,0,0,.2); 
+  cursor: pointer;
+  border: none; 
+}

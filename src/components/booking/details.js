@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withFirebase } from '../Firebase/context'
 import { withRouter } from 'react-router-dom'
+import './details.css'
+// import '../App/App.css'
 
 class Details extends Component {
 	constructor() {
@@ -10,7 +12,9 @@ class Details extends Component {
 			returnDate: '',
 			email: '',
 			error: false,
-			message: ''
+			message: '',
+			collectionTime: '12:00',
+			returnTime: '12:00'
 		}
 		this.validateDateRange = this.validateDateRange.bind(this)
 		this.updateState = this.updateState.bind(this)
@@ -38,7 +42,9 @@ class Details extends Component {
 		} else {
 			this.props.setBookingDetails(
 				this.state.collectionDate,
+				this.state.collectionTime,
 				this.state.returnDate,
+				this.state.returnTime,
 				this.state.email
 			)
 			return this.props.history.push('/loan')
@@ -55,34 +61,61 @@ class Details extends Component {
 	render() {
 		let { error, message } = this.state
 		return (
-			<div>
+			<div className="details__container">
 				{error ? <h1>{message}</h1> : ''}
-				<input
-					id="collectionDate"
-					onChange={this.updateState}
-					placeholder="Collection Date"
-					value={this.state.collectionDate}
-					type="date"
-				/>
+				<div className="input__container">
+					<label className="input__label" htmlFor="collectionDate">Collection Date</label>
+					<input
+						id="collectionDate"
+						onChange={this.updateState}
+						placeholder="Collection Date"
+						value={this.state.collectionDate}
+						type="date"
+					/>
+					<label className="input__label" htmlFor="collectionTime">Collection Time</label>
+					<select id="collectionTime" onChange={this.updateState} value={this.state.collectionTime}>
+						<option value="12:00">12:00</option>
+						<option value="12:15">12:15</option>
+						<option value="12:30">12:30</option>
+						<option value="13:00">13:00</option>
+						<option value="13:15">13:15</option>
+						<option value="13:30">13:30</option>
+						<option value="13:45">13:45</option>
+                	</select>
+				</div>
+				<div className="input__container">
+					<label className="input__label" htmlFor="returnDate">Return Date</label>
+					<input
+						id="returnDate"
+						onChange={this.updateState}
+						placeholder="Return Date"
+						value={this.state.returnDate}
+						type="date"
+					/>
+					<label className="input__label" htmlFor="returnTime">Return Time</label>
+					<select id="returnTime" onChange={this.updateState} value={this.state.returnTime}>
+						<option value="12:00">12:00</option>
+						<option value="12:15">12:15</option>
+						<option value="12:30">12:30</option>
+						<option value="13:00">13:00</option>
+						<option value="13:15">13:15</option>
+						<option value="13:30">13:30</option>
+						<option value="13:45">13:45</option>
+                	</select>
+				</div>
+				<div className="input__container">
+					<label className="input__label" htmlFor="email">Email</label>
+					<input
+						id="email"
+						onChange={this.updateState}
+						placeholder="Email"
+						value={this.state.email}
+						type="email"
+					/>
+				</div>
 
-				<input
-					id="returnDate"
-					onChange={this.updateState}
-					placeholder="Return Date"
-					value={this.state.returnDate}
-					type="date"
-				/>
-
-				<input
-					id="email"
-					onChange={this.updateState}
-					placeholder="Email"
-					value={this.state.email}
-					type="email"
-				/>
-
-				<button onClick={this.validateDateRange}>
-					set booking details!
+				<button className="button" onClick={this.validateDateRange}>
+					set booking details
 				</button>
 			</div>
 		)

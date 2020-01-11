@@ -15,7 +15,9 @@ class App extends Component {
 		this.state = {
 			selectedItems: {},
 			collectionDate: '',
+			collectionTime: '',
 			returnDate: '',
+			returnTime: '',
 			email: '',
 			items: {},
 			loading: false
@@ -44,11 +46,13 @@ class App extends Component {
 		})
 	}
 
-	setBookingDetails(collectionDate, returnDate, email) {
+	setBookingDetails(collectionDate, collectionTime, returnDate, returnTime, email) {
 		this.setState({
 			collectionDate,
 			returnDate,
-			email
+			email,
+			collectionTime,
+			returnTime
 		})
 	}
 
