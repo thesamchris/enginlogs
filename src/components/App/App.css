@@ -1,24 +1,15 @@
-.app {
-  margin: 20px;
-}
-
-nav {
-  width: 50vw;
-  max-width: 500px;
-  display: flex;
-  justify-content: space-around;
-  margin: 20px auto;
-}
-
-.homeButton {
+.app__homeButton {
   text-decoration: none;
   color: white;
-  background: black;
-  padding: 20px;
-  margin: 40px;
+  background: var(--gold-dark);
+  padding: 10px 20px;
+  margin: 29px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 6px rgba(0,0,0,.2);
 }
 
-.buttonsContainer {
+.app__homeButtonsContainer {
   display: flex;
   flex-direction: column;
   width: 50vw;

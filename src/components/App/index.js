@@ -6,6 +6,7 @@ import Details from '../booking/details'
 import Cart from '../booking/cart'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Display from '../items/display'
+import Header from  '../skeleton/header'
 
 class App extends Component {
 	constructor() {
@@ -63,11 +64,8 @@ class App extends Component {
 		return (
 			<Router>
 				<div className="app">
-					<nav>
-						<Link to="/">home</Link>
-						<Link to="/cart">cart</Link>
-					</nav>
-					<Switch>
+					<Header />
+					<Switch className="app__activeRoute">
 						<Route path="/add">
 							<AddInitial />
 							<div>for add initial item, add functionality to add category</div>
@@ -177,11 +175,11 @@ class App extends Component {
 							<p>Successful booking! thanks!</p>
 						</Route>
 						<Route path="/">
-							<div className="buttonsContainer">
-								<Link className="homeButton" to="/view">
+							<div className="app__homeButtonsContainer">
+								<Link className="app__homeButton" to="/view">
 									view
 								</Link>
-								<Link className="homeButton" to="/details">
+								<Link className="app__homeButton" to="/details">
 									loan
 								</Link>
 							</div>
