@@ -7,6 +7,7 @@ import Cart from '../booking/cart'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Display from '../items/display'
 import Header from  '../skeleton/header'
+import Categories from '../items/categories'
 
 class App extends Component {
 	constructor() {
@@ -151,16 +152,10 @@ class App extends Component {
 							/>
 						</Route>
 						<Route path="/loan">
-							<Link to="/loan/sports">Sports</Link>
-							<Link to="/loan/electronics">Electronics</Link>
-							<Link to="/loan/camp">Camp</Link>
-							<Link to="/loan/misc">Misc</Link>
+							<Categories isLoan={true} />
 						</Route>
 						<Route path="/view">
-							<Link to="/view/sports">Sports</Link>
-							<Link to="/view/electronics">Electronics</Link>
-							<Link to="/view/camp">Camp</Link>
-							<Link to="/view/misc">Misc</Link>
+							<Categories isLoan={false} />
 						</Route>
 
 						<Route path="/loan">

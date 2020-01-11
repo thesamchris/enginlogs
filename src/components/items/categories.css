@@ -1,0 +1,49 @@
+.categories__container {
+    max-width: 80vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.categories__card {
+    width: 200px;
+    height: 200px;
+    background: var(--gold-dark);
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,.2);
+    margin: 20px;
+    cursor: pointer;
+}
+
+.categories__card--sports {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), black), url('https://images.unsplash.com/photo-1577784768620-97247ed963f0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=20');
+    background-size: cover;
+    background-position: center center;
+}
+
+.categories__card--elec {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), black), url('https://images.unsplash.com/photo-1531104985437-603d6490e6d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1023&q=20');
+    background-size: cover;
+    background-position: center center;
+}
+
+.categories__card--camp {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), black), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=20');
+    background-size: cover;
+    background-position: center center;
+}
+
+.categories__card--misc {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), black), url('https://images.unsplash.com/photo-1493690283958-32df2c86326e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1948&q=20');
+    background-size: cover;
+    background-position: center center;
+}
+
+.categories__card--title {
+    color: white;
+    display: block;
+    padding-top: 160px;
+    padding-left: 10px;
+    text-decoration: none;
+}
