@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Display from '../items/display'
 import Header from  '../skeleton/header'
 import Categories from '../items/categories'
+import Messages from './messages'
 
 class App extends Component {
 	constructor() {
@@ -20,10 +21,13 @@ class App extends Component {
 			returnTime: '',
 			email: '',
 			items: {},
-			loading: false
+			loading: false,
+			message: '',
+			showMessage: false
 		}
 		this.selectItem = this.selectItem.bind(this)
 		this.setBookingDetails = this.setBookingDetails.bind(this)
+		this.setMessage = this.setMessage.bind(this)
 	}
 
 	componentDidMount() {
@@ -56,6 +60,14 @@ class App extends Component {
 		})
 	}
 
+	setMessage(message) {
+		this.setState({
+			message,
+			showMessage: true
+		})
+		setTimeout(() => this.setState({ showMessage: false }), 5000)
+	}
+
 	render() {
 		let {
 			selectedItems,
@@ -70,6 +82,7 @@ class App extends Component {
 			<Router>
 				<div className="app">
 					<Header />
+					<Messages showMessage={this.state.showMessage} message={this.state.message}/>
 					<Switch className="app__activeRoute">
 						<Route path="/add">
 							<AddInitial />
@@ -82,6 +95,7 @@ class App extends Component {
 								returnDate={returnDate}
 								email={email}
 								setBookingDetails={this.setBookingDetails}
+								setMessage={this.setMessage}
 							/>
 						</Route>
 						<Route path="/cart">

@@ -32,13 +32,9 @@ class Details extends Component {
 				break
 			}
 		}
-
+		// error if: 1. collect and return more than a week apart, 2. if return is before collection
 		if (numberOfDays > 7) {
-			this.setState({
-				message: 'cannot loan items for more than a week',
-				error: true
-			})
-            setTimeout(() => this.setState({ error: false }), 5000)
+			this.props.setMessage('cannot loan items for more than a week')
 		} else {
 			this.props.setBookingDetails(
 				this.state.collectionDate,
