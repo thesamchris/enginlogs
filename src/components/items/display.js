@@ -16,13 +16,15 @@ class Display extends Component {
 
 	componentDidMount() {
 		this.setState({ loading: true })
+		let itemKeys = {}
 		this.props.firebase.initial().orderByChild('category').equalTo(this.props.category).on('child_added', snap => {
+			itemKeys =  {
+				...itemKeys,
+				[snap.key]: true
+			}
 			this.setState({
 				loading: false,
-				itemKeys: {
-					...this.state.itemKeys,
-					[snap.key]: true
-				}
+				itemKeys
 			})
 		})
 	}
@@ -35,7 +37,7 @@ class Display extends Component {
 		let { selectable, selectItem, collectionDate, returnDate, items, category } = this.props
 		let { loading, itemKeys } = this.state
 		let toDisplay
-		if (!items && !itemKeys) {
+		if (!items && !itemKeys && loading) {
 			toDisplay = 'no items'
 		} else if (items && itemKeys && !selectable) {
 			toDisplay = (

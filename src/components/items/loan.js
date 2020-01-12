@@ -28,8 +28,9 @@ class Loan extends Component {
 			elements = (
 				<div>
                     <p>loaning items from: {collectionDate} to {returnDate}</p>
-					<Link className="link__space" to="/cart">go to cart</Link>
+                    <Link className="link__space" to="/loan">back</Link>
                     <Link className="link__space" to="/details">update loaning period</Link>
+					<Link className="link__space" to="/cart">go to cart</Link>
 					<ul>{itemElements}</ul>
 				</div>
 			)

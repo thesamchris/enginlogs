@@ -17,12 +17,14 @@ class Details extends Component {
 		}
 		this.validateDateRange = this.validateDateRange.bind(this)
 		this.updateState = this.updateState.bind(this)
+		this.areSameDay = this.areSameDay.bind(this)
 	}
 
 	validateDateRange(e) {
 		e.preventDefault()
 		let collectionDate = new Date(this.state.collectionDate)
 		let returnDate = new Date(this.state.returnDate)
+		let today = new Date()
 		let numberOfDays = 0
 		let i
 		for (i = collectionDate; i < returnDate; i.setDate(i.getDate() + 1)) {
@@ -33,18 +35,36 @@ class Details extends Component {
 		}
 		// error if: 1. collect and return more than a week apart, 2. if return is before collection
 		if (numberOfDays > 7) {
-			this.props.setMessage('cannot loan items for more than a week')
-		} else {
-			this.props.setBookingDetails(
-				this.state.collectionDate,
-				this.state.collectionTime,
-				this.state.returnDate,
-				this.state.returnTime,
-				this.state.email
-			)
-			return this.props.history.push('/loan')
+			return this.props.setMessage('Cannot loan for more than a week')
+		} 
+		
+		let collectionDateOriginal = new Date(this.state.collectionDate)
+		if (returnDate < collectionDateOriginal) {
+			return this.props.setMessage('Collection date must be before return date')
+		} 
+	
+		if (this.areSameDay(collectionDateOriginal, today) || collectionDateOriginal < today || this.areSameDay(returnDate, today)) {
+			return this.props.setMessage('Collection date cannot be today or before today')
 		}
-    }
+
+		this.props.setBookingDetails(
+			this.state.collectionDate,
+			this.state.collectionTime,
+			this.state.returnDate,
+			this.state.returnTime,
+			this.state.email
+		)
+		return this.props.history.push('/loan')
+	
+	}
+	
+	areSameDay(first, second) {
+		return (
+			first.getFullYear() === second.getFullYear() &&
+			first.getMonth() === second.getMonth() &&
+			first.getDate() === second.getDate()
+		)
+	}
     
 	updateState(e) {
 		let { id, value } = e.target
@@ -55,6 +75,8 @@ class Details extends Component {
 
 	render() {
 		let { error, message } = this.state
+		let { collectionDate, collectionTime, returnDate, returnTime, email } = this.state
+		let canSubmit = collectionDate && collectionTime && returnDate && returnTime && email 
 		return (
 			<div className="details__container">
 				{error ? <h1>{message}</h1> : ''}
@@ -109,7 +131,7 @@ class Details extends Component {
 					/>
 				</div>
 
-				<button className="button" onClick={this.validateDateRange}>
+				<button disabled={!canSubmit} className="button" onClick={this.validateDateRange}>
 					set booking details
 				</button>
 			</div>
