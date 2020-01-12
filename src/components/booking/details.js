@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withFirebase } from '../Firebase/context'
 import { withRouter } from 'react-router-dom'
 import './details.css'
-// import '../App/App.css'
 
 class Details extends Component {
 	constructor() {

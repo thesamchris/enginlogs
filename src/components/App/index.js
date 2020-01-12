@@ -83,10 +83,9 @@ class App extends Component {
 				<div className="app">
 					<Header />
 					<Messages showMessage={this.state.showMessage} message={this.state.message}/>
-					<Switch className="app__activeRoute">
+					<Switch>
 						<Route path="/add">
-							<AddInitial />
-							<div>for add initial item, add functionality to add category</div>
+							<AddInitial setMessage={this.setMessage}/>
 						</Route>
 						<Route path="/details">
 							<Details

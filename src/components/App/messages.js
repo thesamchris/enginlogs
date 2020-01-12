@@ -3,7 +3,7 @@ import React from 'react'
 const Messages = ({ message, showMessage }) => {
     let MessageElement = <div>{message}</div>
     return (
-        <div>
+        <div className={ showMessage ? "message" : "message__hide"}>
             { showMessage ? MessageElement : '' }
         </div>
     )

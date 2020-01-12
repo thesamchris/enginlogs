@@ -10,6 +10,7 @@ class AddIntialForm extends React.Component {
         }
         this.addNewItem = this.addNewItem.bind(this)
         this.updateState = this.updateState.bind(this)
+        this.clearForm = this.clearForm.bind(this)
     }
 
     addNewItem(e) {
@@ -21,7 +22,23 @@ class AddIntialForm extends React.Component {
             category: this.state.category
         }
 
-        newItemRef.set({...newItem})
+        newItemRef.set({...newItem}, error => {
+            if (error) {
+                this.props.setMessage(error)
+            } else {
+                this.props.setMessage('Item added successfully!')
+            }
+
+            return this.clearForm()
+        })
+    }
+
+    clearForm() {
+        this.setState({
+            itemName: '',
+            itemQuantity: '',
+            category: 'camp'
+        })
     }
 
     updateState(e) {
@@ -32,17 +49,31 @@ class AddIntialForm extends React.Component {
     }
 
     render() {
+        let { itemName, itemQuantity, category } = this.state
+        let canSubmit = itemName && itemQuantity && category
         return (
-            <div>
-                <input id="itemName" onChange={this.updateState} placeholder="Name" value={this.state.itemName}/>
-                <input id="itemQuantity" placeholder="Quantity" type="number" onChange={this.updateState} value={this.state.itemQuantity}/>
-                <select id="category" onChange={this.updateState} value={this.state.category}>
-                    <option value="camp">Camp</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="sports">Sport</option>
-                    <option value="misc">Misc</option>
-                </select>
-                <button onClick={this.addNewItem}>add item!</button>
+            <div className="page page--centered">
+                <h1>Add Item</h1>
+                <div className="input__container">
+                    <label className="input__label" htmlFor="itemName">Item Name</label>
+                    <input id="itemName" onChange={this.updateState} placeholder="Name" value={this.state.itemName}/>
+                </div>
+                <div className="input__container">
+                    <label className="input__label" htmlFor="itemQuantity">Item Quantity</label>
+                    <input id="itemQuantity" placeholder="Quantity" type="number" onChange={this.updateState} value={this.state.itemQuantity}/>
+                </div>
+                <div className="input__container">
+                    <label className="input__label" htmlFor="category">Category</label>
+                    <select id="category" onChange={this.updateState} value={this.state.category}>
+                        <option value="camp">Camp</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="sports">Sport</option>
+                        <option value="misc">Misc</option>
+                    </select>
+                </div>
+                <div className="input__container">
+                    <button disabled={!canSubmit} className="button" onClick={this.addNewItem}>add item</button>
+                </div>
             </div>
         )
     }

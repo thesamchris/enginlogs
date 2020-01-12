@@ -20,7 +20,7 @@ html {
 
 /* shared style */
 
-input {
+input, select {
   width: 220px;
 }
 
@@ -38,6 +38,20 @@ input {
 
 .link__space {
   margin: 10px;
+}
+
+.page {
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
+.page--centered {
+  width: 220px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Sections

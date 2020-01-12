@@ -4,11 +4,11 @@ import AddIntialForm from './form'
 
 
 
-const AddInitialContainer = () => (
+const AddInitialContainer = ({ setMessage }) => (
     <FirebaseContext.Consumer>
         {
             firebase => {
-                return <AddIntialForm initialRef={firebase.db.ref('initial')}/>
+                return <AddIntialForm setMessage={setMessage} initialRef={firebase.db.ref('initial')}/>
             }
         }
     </FirebaseContext.Consumer>
