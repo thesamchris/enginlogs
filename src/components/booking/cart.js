@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withFirebase } from '../Firebase/context'
 import CartItem from './cartItem'
 import { withRouter, Link } from 'react-router-dom'
+import sgMail from "@sendgrid/mail"
 
 class Cart extends Component {
 	constructor(props) {
@@ -27,16 +28,31 @@ class Cart extends Component {
 		let { key: bookingId } = newBookingRef
 		newBookingRef.set(newBooking)
 		let j
-		Object.keys(newBooking.selectedItems).map(itemId => {
-			for (j = collectionDate; j <= returnDate; j.setDate(j.getDate() + 1)) {
-				let day = j.toISOString().substring(0, 10)
-				this.props.firebase.bookItem(itemId, day).update({
-					[bookingId]: newBooking.selectedItems[itemId]
-				})
-			}
-			collectionDate = new Date(newBooking.collectionDate)
-		})
+		// Object.keys(newBooking.selectedItems).map(itemId => {
+		// 	for (j = collectionDate; j <= returnDate; j.setDate(j.getDate() + 1)) {
+		// 		let day = j.toISOString().substring(0, 10)
+		// 		this.props.firebase.bookItem(itemId, day).update({
+		// 			[bookingId]: newBooking.selectedItems[itemId]
+		// 		})
+		// 	}
+		// 	collectionDate = new Date(newBooking.collectionDate)
+		// })
+		this.sendConfirmationEmail(collectionDate, returnDate, newBooking.email, newBooking.selectedItems)
 		this.props.history.push('/success')
+	}
+
+	sendConfirmationEmail(collectionDate, returnDate, email, items) {
+		// send email here
+		sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+		const msg = {
+			to: 'hellosamchris@gmail.com',
+			from: 'no-reply@enginclub.com',
+			cc: "thesamchris@gmail.com, vicepresident.1@enginclub.com",
+			subject: `Engin Club: Booking confirmation for ${collectionDate.toDateString()}`,
+			text: 'and easy to do anywhere, even with Node.js',
+			html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+		}
+		sgMail.send(msg)
 	}
 
 	render() {
