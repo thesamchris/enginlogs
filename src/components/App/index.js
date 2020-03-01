@@ -72,6 +72,8 @@ class App extends Component {
 		let {
 			selectedItems,
 			collectionDate,
+			collectionTime,
+			returnTime,
 			returnDate,
 			email,
 			items,
@@ -107,6 +109,9 @@ class App extends Component {
 								items={items}
 								loading={loading}
 								email={email}
+								setMessage={this.setMessage}
+								collectionTime={collectionTime}
+								returnTime={returnTime}
 							/>
 						</Route>
 						<Route path="/bookings">

@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import { withFirebase } from '../Firebase/context'
 import CartItem from './cartItem'
 import { withRouter, Link } from 'react-router-dom'
-import sgMail from "@sendgrid/mail"
+import axios from 'axios'
+
+axios.create({
+	baseURL: '/'
+})
 
 class Cart extends Component {
 	constructor(props) {
@@ -14,6 +18,7 @@ class Cart extends Component {
 
 		this.handleChange = this.handleChange.bind(this)
 		this.newBooking = this.newBooking.bind(this)
+		this.sendConfirmationEmail = this.sendConfirmationEmail.bind(this)
 	}
 
 	handleChange(e) {
@@ -28,31 +33,46 @@ class Cart extends Component {
 		let { key: bookingId } = newBookingRef
 		newBookingRef.set(newBooking)
 		let j
-		// Object.keys(newBooking.selectedItems).map(itemId => {
-		// 	for (j = collectionDate; j <= returnDate; j.setDate(j.getDate() + 1)) {
-		// 		let day = j.toISOString().substring(0, 10)
-		// 		this.props.firebase.bookItem(itemId, day).update({
-		// 			[bookingId]: newBooking.selectedItems[itemId]
-		// 		})
-		// 	}
-		// 	collectionDate = new Date(newBooking.collectionDate)
-		// })
-		this.sendConfirmationEmail(collectionDate, returnDate, newBooking.email, newBooking.selectedItems)
+		Object.keys(newBooking.selectedItems).map(itemId => {
+			for (j = collectionDate; j <= returnDate; j.setDate(j.getDate() + 1)) {
+				let day = j.toISOString().substring(0, 10)
+				this.props.firebase.bookItem(itemId, day).update({
+					[bookingId]: newBooking.selectedItems[itemId]
+				})
+			}
+			collectionDate = new Date(newBooking.collectionDate)
+		})
+		this.sendConfirmationEmail(bookingId, collectionDate, returnDate, newBooking)
 		this.props.history.push('/success')
 	}
 
-	sendConfirmationEmail(collectionDate, returnDate, email, items) {
+	async sendConfirmationEmail(bookingId, collectionDate, returnDate, newBooking) {
 		// send email here
-		sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-		const msg = {
-			to: 'hellosamchris@gmail.com',
-			from: 'no-reply@enginclub.com',
-			cc: "thesamchris@gmail.com, vicepresident.1@enginclub.com",
-			subject: `Engin Club: Booking confirmation for ${collectionDate.toDateString()}`,
-			text: 'and easy to do anywhere, even with Node.js',
-			html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+		let { email, selectedItems:items, collectionTime, returnTime } = newBooking
+		try {
+			let itemsForEmail = Object.keys(items).map(key => { 
+				let itemName = this.props.items[key].name
+				return {
+					id: key,
+					quantity: items[key],
+					name: itemName
+				}
+			})
+			const response = await axios.post('/.netlify/functions/send-confirmation-email', {
+				collectionDate: collectionDate.toDateString(),
+				returnDate: returnDate.toDateString(),
+				email,
+				bookingId,
+				items: itemsForEmail,
+				collectionTime,
+				returnTime
+			})
+			this.props.setMessage(`Confirmation has been sent to ${email}`)
+			console.log(response)
+		} catch (error) {
+			this.props.setMessage('We could not send the confirmation email.')
+			console.log(error.response.data)
 		}
-		sgMail.send(msg)
 	}
 
 	render() {
@@ -67,6 +87,8 @@ class Cart extends Component {
 			collectionDate: this.props.collectionDate,
 			returnDate: this.props.returnDate,
 			selectedItems: this.props.selectedItems,
+			collectionTime: this.props.collectionTime,
+			returnTime: this.props.returnTime,
 			email: this.props.email
 		}
 		let itemElements
@@ -110,6 +132,7 @@ class Cart extends Component {
 					''
 				)}
 			</div>
+
 		)
 	}
 }
