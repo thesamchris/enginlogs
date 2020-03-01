@@ -28,10 +28,9 @@ exports.handler = async (event, context) => {
   
   const msg = {
 		to: `${data.email}`,
-		cc: 'hellosamchris@gmail.com',
-		bcc: 'vicepresident.1@enginclub.com',
+		cc: 'logistics@enginclub.com',
 		from: 'logistics@enginclub.com',
-		subject: `Engin Club: Booking Confirmation for ${data.collectionDate}`,
+		subject: `Engin Club: Booking Id ${data.collectionDate}`,
 		text: `Engin Club Logistics: ${data.bookingId}`,
 		html: `<div class="container" style="width: 90vw;margin: 50px auto;font-family: sans-serif;">
   <div class="header">
