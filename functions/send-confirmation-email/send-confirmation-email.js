@@ -30,7 +30,7 @@ exports.handler = async (event, context) => {
 		to: `${data.email}`,
 		cc: 'logistics@enginclub.com',
 		from: 'logistics@enginclub.com',
-		subject: `Engin Club: Booking Id ${data.collectionDate}`,
+		subject: `Engin Club: Booking Confirmation for ${data.collectionDate}`,
 		text: `Engin Club Logistics: ${data.bookingId}`,
 		html: `<div class="container" style="width: 90vw;margin: 50px auto;font-family: sans-serif;">
   <div class="header">
