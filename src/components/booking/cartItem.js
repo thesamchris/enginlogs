@@ -7,10 +7,21 @@ class CartItem extends Component {
         super(props)
 
         this.state = {
-            quantity: ''
+            quantity: 0,
+            maxValue: 0
         }
 
         this.updateState = this.updateState.bind(this)
+        this.increment = this.increment.bind(this)
+        this.decrement = this.decrement.bind(this)
+    }
+
+    componentDidMount() {
+        let { itemData, collectionDate, returnDate } = this.props
+        let maxValue = amountAvailable(itemData, collectionDate, returnDate)
+        this.setState({
+            maxValue
+        })
     }
 
     updateState(e) {
@@ -19,14 +30,45 @@ class CartItem extends Component {
             [id]: value
         })
     }
+
+    increment() {
+        let newAmount = this.state.quantity + 1
+        if (newAmount <= this.state.maxValue) {
+            this.setState({
+                quantity: newAmount
+            })
+            this.props.onChange(this.props.id, newAmount)
+        } 
+    }
+
+    decrement() {
+        let newAmount = this.state.quantity - 1
+        if (newAmount >= 0) {
+            this.setState({
+                quantity: newAmount
+            })
+            this.props.onChange(this.props.id, newAmount)
+        } 
+    }
     
     render() {
-        let { itemData, id, selectItem, collectionDate, returnDate, haveDateRange } = this.props
+       let {
+            itemData,
+            id,
+            selectItem,
+            collectionDate,
+            returnDate,
+            haveDateRange
+        } = this.props
         let maxValue = amountAvailable(itemData, collectionDate, returnDate)
+        
         return (
 					<div>
 						<p>{itemData.name}</p>
-						<input
+                        <button onClick={this.increment}>+</button>
+                        <p>{this.state.quantity}</p>
+                        <button onClick={this.decrement}>-</button>
+						{/* <input
 							onChange={this.props.onChange}
 							id={id}
 							type="number"
@@ -34,7 +76,7 @@ class CartItem extends Component {
 							placeholder="0"
                             max={maxValue}
                             min={0}
-						/>
+						/> */}
 						{haveDateRange
 							? `there are ${maxValue} of ${itemData.quantity} available`
 							: ''}

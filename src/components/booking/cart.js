@@ -13,7 +13,8 @@ class Cart extends Component {
 		super(props)
 		this.state = {
 			loading: false,
-			items: {}
+			items: {},
+			buttonDisabled: false
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -21,10 +22,8 @@ class Cart extends Component {
 		this.sendConfirmationEmail = this.sendConfirmationEmail.bind(this)
 	}
 
-	handleChange(e) {
-		e.preventDefault()
-		let { id, value } = e.target
-		this.props.selectItem(id, value)
+	handleChange(id, value) {
+		return this.props.selectItem(id, value)
 	}
 
 	newBooking(collectionDate, returnDate, newBooking) {
@@ -118,6 +117,8 @@ class Cart extends Component {
 				{haveItemsInCart ? itemElements : 'please select some items'}
 				{haveItemsInCart ? (
 					<button
+						className="button"
+						disabled={this.state.buttonDisabled}
 						onClick={() =>
 							this.newBooking(
 								new Date(collectionDate),
