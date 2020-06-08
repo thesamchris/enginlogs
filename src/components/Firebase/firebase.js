@@ -1,5 +1,6 @@
 import app from 'firebase/app'
-import 'firebase/database' 
+import 'firebase/database'
+import 'firebase/auth' 
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -11,22 +12,42 @@ const config = {
 }
 
 class Firebase {
-    constructor() {
-        app.initializeApp(config)
-        this.db = app.database()
-    }
+	constructor() {
+		app.initializeApp(config)
+		this.db = app.database()
+		this.auth = app.auth()
+	}
 
-    initial = () => this.db.ref('initial')
+	initial = () => this.db.ref('initial')
 
-    loaners = () => this.db.ref('loaners')
+	loaners = () => this.db.ref('loaners')
 
-    loaner = (telegramHandle) => this.db.ref('loaners').child(telegramHandle)
+	loaner = (telegramHandle) => this.db.ref('loaners').child(telegramHandle)
 
-    bookItem = (uid, day) => this.db.ref('initial').child(uid).child('bookings').child(day)
+	bookItem = (uid, day) =>
+		this.db.ref('initial').child(uid).child('bookings').child(day)
 
-    bookings = () => this.db.ref('bookings')
+	bookings = () => this.db.ref('bookings')
 
-    particularBooking = (uid) => this.db.ref('bookings').child(uid) 
+	particularBooking = (uid) => this.db.ref('bookings').child(uid)
+
+	doSignIn = () => {
+		let provider = new this.auth.GoogleAuthProvider()
+		this.auth.signInWithRedirect(provider)
+	}
+
+	doCreateUserWithEmailAndPassword = (email, password) =>
+		this.auth.createUserWithEmailAndPassword(email, password)
+
+	doSignInWithEmailAndPassword = (email, password) =>
+		this.auth.signInWithEmailAndPassword(email, password)
+
+	doPasswordReset = (email) => this.auth.sendPasswordResetEmail(email)
+
+	doPasswordUpdate = (password) =>
+		this.auth.currentUser.updatePassword(password)
+
+	doSignOut = () => this.auth.signOut()
 }
 
 export default Firebase

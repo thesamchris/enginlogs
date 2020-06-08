@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './App.css'
 import { withFirebase } from '../Firebase/context'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 import AddInitial from '../addInitial'
 import Details from '../booking/details'
 import Cart from '../booking/cart'
@@ -9,6 +11,12 @@ import Display from '../items/display'
 import Header from  '../skeleton/header'
 import Categories from '../items/categories'
 import Messages from './messages'
+import HomePage from '../pages/home'
+import withAuthProtection from './withAuthProtection'
+import Nav from '../skeleton/Nav'
+import SignIn from '../pages/auth/SignIn'
+import SignUp from '../pages/auth/SignUp'
+import { SIGN_UP, SIGN_IN } from '../../constants/routes'
 
 class App extends Component {
 	constructor() {
@@ -23,7 +31,8 @@ class App extends Component {
 			items: {},
 			loading: false,
 			message: '',
-			showMessage: false
+			showMessage: false,
+			user: firebase.auth().currentUser
 		}
 		this.selectItem = this.selectItem.bind(this)
 		this.setBookingDetails = this.setBookingDetails.bind(this)
@@ -80,15 +89,19 @@ class App extends Component {
 			loading
 		} = this.state
 		let haveDateRange = collectionDate && returnDate
+
+		const ProtectedAdd = withAuthProtection('/')(AddInitial)
+
 		return (
 			<Router>
 				<div className="app">
 					<Header />
+					<Nav />
 					<Messages showMessage={this.state.showMessage} message={this.state.message}/>
 					<Switch>
-						<Route path="/add">
-							<AddInitial setMessage={this.setMessage}/>
-						</Route>
+						<Route path="/add" render={props => (<ProtectedAdd {...props} user={this.state.user} setMessage={this.setMessage}/>)} />
+						<Route path={SIGN_IN} component={SignIn}/>
+						<Route path={SIGN_UP} component={SignUp}/>
 						<Route path="/details">
 							<Details
 								selectedItems={selectedItems}
@@ -191,14 +204,18 @@ class App extends Component {
 						<Route path="/success">
 							<p>Successful booking! thanks!</p>
 						</Route>
+						<Route path="/dashboard">
+							<p>dashboard</p>
+						</Route> 
 						<Route path="/">
 							<div className="app__homeButtonsContainer">
-								<Link className="app__homeButton" to="/view">
+								<HomePage />
+								{/* <Link className="app__homeButton" to="/view">
 									view
 								</Link>
 								<Link className="app__homeButton" to="/details">
 									loan
-								</Link>
+								</Link> */}
 							</div>
 						</Route>
 					</Switch>
