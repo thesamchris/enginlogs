@@ -17,6 +17,7 @@ import withAuthProtection from './withAuthProtection'
 import Nav from '../skeleton/Nav'
 import SignIn from '../pages/auth/SignIn'
 import SignUp from '../pages/auth/SignUp'
+import Search from '../items/search'
 import { SIGN_UP, SIGN_IN } from '../../constants/routes'
 
 class App extends Component {
@@ -207,10 +208,10 @@ class App extends Component {
 							/>
 						</Route>
 						<Route path="/loan">
-							<Categories isLoan={true} />
+							<Categories items={items} isLoan={true} />
 						</Route>
 						<Route path="/view">
-							<Categories isLoan={false} />
+							<Categories items={items} isLoan={false} />
 						</Route>
 
 						<Route path="/loan">
@@ -226,6 +227,9 @@ class App extends Component {
 						</Route>
 						<Route path="/dashboard">
 							<DashboardPage bookings={bookings} authUser={authUser}/>
+						</Route>
+						<Route path="/search">
+							<Search items={items}/>
 						</Route> 
 						<Route path="/">
 							<div className="app__homeButtonsContainer">

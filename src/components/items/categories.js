@@ -1,9 +1,12 @@
 import React from 'react'
 import './categories.css'
 import { Link } from 'react-router-dom'
+import Search from './search'
 
-const Categories = ({ isLoan }) => (
+const Categories = ({ isLoan, items }) => (
 	<div className="categories__container">
+        {/* <Link to='/search'>Search here!</Link> */}
+        <Search items={items}/>
         <div className="categories__card categories__card--sports">
 		    <Link className="categories__card--title" to={`/${isLoan ? 'loan' : 'view'}/sports`} >Sports</Link>
         </div>
