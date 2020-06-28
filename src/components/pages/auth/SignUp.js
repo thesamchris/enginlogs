@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { SIGN_UP} from '../../../constants/routes'
-import { FirebaseContext } from '../../Firebase'
+import { Link, withRouter } from 'react-router-dom'
+import { compose } from 'recompose'
+
+import { SIGN_UP, HOME } from '../../../constants/routes'
+import { withFirebase } from '../../Firebase'
 
 const INITIAL_STATE = {
 	firstName: '',
@@ -14,13 +16,11 @@ const INITIAL_STATE = {
 const SignUp = () => (
 	<div>
 		Sign Up here!
-		<FirebaseContext.Consumer>
-			{(firebase) => <SignUpForm firebase={firebase}/>}
-		</FirebaseContext.Consumer>
+		<SignUpForm />
 	</div>
 )
 
-class SignUpForm extends React.Component {
+class SignUpFormBase extends React.Component {
     constructor(props) {
         super(props)
 
@@ -34,6 +34,7 @@ class SignUpForm extends React.Component {
 					.doCreateUserWithEmailAndPassword(email, passwordOne)
 					.then((authUser) => {
 						this.setState({ ...INITIAL_STATE })
+                        this.props.history.push(HOME)
 					})
 					.catch((error) => {
 						this.setState({ error })
@@ -74,6 +75,11 @@ const SignUpLink = () => (
         Don't have an account? <Link to={SIGN_UP}>Sign Up</Link>
     </p>
 )
+
+const SignUpForm = compose(
+    withRouter,
+    withFirebase,
+)(SignUpFormBase)
 
 export default SignUp
 export { SignUpForm, SignUpLink }

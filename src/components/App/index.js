@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import { withFirebase } from '../Firebase/context'
+import { withFirebase } from '../Firebase'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import AddInitial from '../addInitial'
@@ -32,7 +32,7 @@ class App extends Component {
 			loading: false,
 			message: '',
 			showMessage: false,
-			user: firebase.auth().currentUser
+			authUser: null
 		}
 		this.selectItem = this.selectItem.bind(this)
 		this.setBookingDetails = this.setBookingDetails.bind(this)
@@ -48,6 +48,16 @@ class App extends Component {
 				items: snap.val()
 			})
 		})
+
+		this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
+			authUser
+				? this.setState({ authUser })
+				: this.setState({ authUser: null })
+		})
+	}
+
+	componentWillUnmount() {
+		this.listener()
 	}
 
 	selectItem(key, quantity) {
@@ -86,7 +96,8 @@ class App extends Component {
 			returnDate,
 			email,
 			items,
-			loading
+			loading,
+			authUser
 		} = this.state
 		let haveDateRange = collectionDate && returnDate
 
@@ -96,7 +107,7 @@ class App extends Component {
 			<Router>
 				<div className="app">
 					<Header />
-					<Nav />
+					<Nav authUser={authUser}/>
 					<Messages showMessage={this.state.showMessage} message={this.state.message}/>
 					<Switch>
 						<Route path="/add" render={props => (<ProtectedAdd {...props} user={this.state.user} setMessage={this.setMessage}/>)} />
