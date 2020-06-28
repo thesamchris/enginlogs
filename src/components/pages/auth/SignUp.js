@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
-import { SIGN_UP, HOME } from '../../../constants/routes'
+import { SIGN_UP, DASHBOARD } from '../../../constants/routes'
 import { withFirebase } from '../../Firebase'
 
 const INITIAL_STATE = {
@@ -34,7 +34,7 @@ class SignUpFormBase extends React.Component {
 					.doCreateUserWithEmailAndPassword(email, passwordOne)
 					.then((authUser) => {
 						this.setState({ ...INITIAL_STATE })
-                        this.props.history.push(HOME)
+                        this.props.history.push(DASHBOARD)
 					})
 					.catch((error) => {
 						this.setState({ error })

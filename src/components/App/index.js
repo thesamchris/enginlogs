@@ -12,6 +12,7 @@ import Header from  '../skeleton/header'
 import Categories from '../items/categories'
 import Messages from './messages'
 import HomePage from '../pages/home'
+import DashboardPage from '../pages/dashboard'
 import withAuthProtection from './withAuthProtection'
 import Nav from '../skeleton/Nav'
 import SignIn from '../pages/auth/SignIn'
@@ -29,6 +30,7 @@ class App extends Component {
 			returnTime: '',
 			email: '',
 			items: {},
+			bookings: {},
 			loading: false,
 			message: '',
 			showMessage: false,
@@ -46,6 +48,12 @@ class App extends Component {
 			this.setState({
 				loading: false,
 				items: snap.val()
+			})
+		})
+
+		this.props.firebase.bookings().on('value', snap => {
+			this.setState({
+				bookings: snap.val()
 			})
 		})
 
@@ -97,7 +105,8 @@ class App extends Component {
 			email,
 			items,
 			loading,
-			authUser
+			authUser,
+			bookings
 		} = this.state
 		let haveDateRange = collectionDate && returnDate
 
@@ -216,7 +225,7 @@ class App extends Component {
 							<p>Successful booking! thanks!</p>
 						</Route>
 						<Route path="/dashboard">
-							<p>dashboard</p>
+							<DashboardPage bookings={bookings} authUser={authUser}/>
 						</Route> 
 						<Route path="/">
 							<div className="app__homeButtonsContainer">
