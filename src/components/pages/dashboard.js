@@ -1,5 +1,6 @@
 import React from 'react'
 import { withFirebase } from '../Firebase'
+import BottomBar from '../skeleton/bottomBar'
 
 class Dashboard extends React.Component {
     constructor() {
@@ -19,10 +20,13 @@ class Dashboard extends React.Component {
             }
         })
         return (
-            <div>
-                <h1>hello { authUser ? authUser.email : '' } </h1>
+            <div className="dashboard__container user__container">
+                <div className="user__logo"></div>
+                <div className="tagline">welcome back!</div>
+                <p className="text-center"><strong>{ authUser ? authUser.email : '' }</strong></p>
                 your booking ids are:
                 <ul>{ userBookings ? userBookings : 'loading' }</ul>
+                <BottomBar />
             </div>
         )
     }

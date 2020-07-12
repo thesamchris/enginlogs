@@ -1,0 +1,61 @@
+.bar__container {
+    position: absolute;
+    bottom: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: white;
+}
+
+.bar__sections_container {
+    display: flex;
+    width: 50%;
+    max-width: 300px;
+    max-height: 65px;
+    border-radius: 40px;
+    border: 1px solid var(--grey);
+    padding: 15px 55px;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bar__section_image {
+    width: 16px;
+    height: 16px;
+}
+
+.bar__dashboard {
+    background: url(../../assets/list@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.bar__items {
+    background: url(../../assets/items@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.bar__loan {
+    background: url(../../assets/checkout@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.bar__section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.bar__section_name {
+    color: var(--grey);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 10px;
+    margin-top: 7px;
+}
