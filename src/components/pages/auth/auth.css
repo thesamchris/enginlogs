@@ -1,0 +1,18 @@
+.signin__button {
+    margin: 25px auto 0 auto;
+}
+
+.signin__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signup__link {
+    color: white;
+}
+
+.signin__button[disabled] {
+    background: grey;
+    color: #3a3a3a;
+}

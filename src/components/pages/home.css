@@ -2,14 +2,6 @@
     margin: 0 auto 40px auto;
 }
 
-.home__content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 25px 0;
-}
-
 .home__tagline {
     font-size: 30px;
     text-align: center;

@@ -5,6 +5,8 @@ import { compose } from 'recompose'
 import { SIGN_UP, DASHBOARD } from '../../../constants/routes'
 import { withFirebase } from '../../Firebase'
 
+import './auth.css'
+
 const INITIAL_STATE = {
 	firstName: '',
 	email: '',
@@ -14,9 +16,12 @@ const INITIAL_STATE = {
 }
 
 const SignUp = () => (
-	<div>
-		Sign Up here!
-		<SignUpForm />
+	<div className="mobile__bg">
+		<div className="mobile__content spaced__content">
+			<div className="logo__white"></div>
+			<h1 className="tagline">Glad To Serve You!</h1>
+			<SignUpForm />
+		</div>
 	</div>
 )
 
@@ -57,14 +62,14 @@ class SignUpFormBase extends React.Component {
 					firstName === ''
 
         return (
-            <form onSubmit={this.onSubmit}>
+            <form className="signin__form" onSubmit={this.onSubmit}>
                 { error && <p>{error.message}</p> }
                 <input type="text" name="firstName" value={firstName} onChange={this.onChange} placeholder="First Name"/>
                 <input type="email" name="email" value={email} onChange={this.onChange} placeholder="Email"/>
                 <input type="password" name="passwordOne" value={passwordOne} onChange={this.onChange} placeholder="Password"/>
                 <input type="password" name="passwordTwo" value={passwordTwo} onChange={this.onChange} placeholder="Confirm Password"/>
 
-                <button disabled={isInvalid} type="submit">Sign Up</button>
+                <button className="button__unauth signin__button" disabled={isInvalid} type="submit">Sign Up</button>
             </form>
         )
     }
@@ -72,7 +77,7 @@ class SignUpFormBase extends React.Component {
 
 const SignUpLink = () => (
     <p>
-        Don't have an account? <Link to={SIGN_UP}>Sign Up</Link>
+        Don't have an account? <Link className="signup__link" to={SIGN_UP}>Sign Up</Link>
     </p>
 )
 

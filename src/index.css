@@ -39,6 +39,36 @@ html {
   background-repeat: no-repeat;
 }
 
+.spaced__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px 0;
+}
+
+.button__unauth {
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--orange);
+    padding: 20px 50px;
+    background: white;
+    box-shadow: var(--orange) 0 5px 11px;
+    border-radius: 30px;
+    border: none;
+}
+
+button:active {
+  outline: none;
+}
+
+.tagline {
+    font-size: 30px;
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 300;
+}
 
 /* shared style */
 
