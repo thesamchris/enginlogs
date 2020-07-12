@@ -1,0 +1,35 @@
+.home__logo {
+    margin: 0 auto 40px auto;
+}
+
+.home__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px 0;
+}
+
+.home__tagline {
+    font-size: 30px;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0 0 80px 0;
+}
+
+.home__button {
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--orange);
+    padding: 20px 50px;
+    background: white;
+    box-shadow: var(--orange) 0 5px 11px;
+    border-radius: 30px;
+}
+
+.home__account {
+   margin-top: 25px;
+   text-align: center;
+   color: white; 
+}

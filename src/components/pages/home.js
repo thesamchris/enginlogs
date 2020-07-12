@@ -1,31 +1,15 @@
-import React, { Component } from 'react'
-import firebase from 'firebase'
-
-class HomePage extends Component {
-    constructor() {
-        super()
-        this.signIn = this.signIn.bind(this)
-        this.provider = new firebase.auth.GoogleAuthProvider()
-    }
-
-    componentDidMount() {
-        firebase.auth().languageCode = 'en'
-        
-    }
-
-    signIn() {
-        console.log('sign in with google')
-        firebase.auth().signInWithRedirect(this.provider)
-        window.location = '/dashboard'
-    }
-
-    render() {
-        return (
-					<button className="app__homeButton" onClick={this.signIn}>
-						Sign In With Google
-					</button>
-				)
-    }
-}
+import React from 'react'
+import { Link } from 'react-router-dom'
+import './home.css'
+const HomePage = () => (
+    <div className="mobile__bg">
+        <div className="mobile__content home__content">
+            <div className="logo__white home__logo"></div>
+            <div className="home__tagline">loaning made simple</div>
+            <Link to="/sign-in" className="home__button">sign in</Link>
+            <Link to="/sign-up" className="home__account">or create an account</Link>
+        </div> 
+    </div>
+)
 
 export default HomePage

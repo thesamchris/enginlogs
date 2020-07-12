@@ -115,9 +115,9 @@ class App extends Component {
 
 		return (
 			<Router>
-				<div className="app">
-					<Header />
-					<Nav authUser={authUser}/>
+				<div>
+					{/* <Header />
+					<Nav authUser={authUser}/> */}
 					<Messages showMessage={this.state.showMessage} message={this.state.message}/>
 					<Switch>
 						<Route path="/add" render={props => (<ProtectedAdd {...props} user={this.state.user} setMessage={this.setMessage}/>)} />
@@ -232,15 +232,7 @@ class App extends Component {
 							<Search items={items}/>
 						</Route> 
 						<Route path="/">
-							<div className="app__homeButtonsContainer">
-								<HomePage />
-								{/* <Link className="app__homeButton" to="/view">
-									view
-								</Link>
-								<Link className="app__homeButton" to="/details">
-									loan
-								</Link> */}
-							</div>
+							<HomePage />
 						</Route>
 					</Switch>
 				</div>
