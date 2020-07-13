@@ -226,7 +226,7 @@ class App extends Component {
 							<p>Successful booking! thanks!</p>
 						</Route>
 						<Route path="/dashboard">
-							<DashboardPage bookings={bookings} authUser={authUser}/>
+							<DashboardPage items={items} bookings={bookings} authUser={authUser}/>
 						</Route>
 						<Route path="/search">
 							<Search items={items}/>
