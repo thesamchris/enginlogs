@@ -50,6 +50,7 @@
     align-items: center;
     flex-direction: column;
     text-decoration: none;
+    position: relative;
 }
 
 .bar__section_name {
@@ -58,4 +59,14 @@
     font-weight: bold;
     font-size: 10px;
     margin-top: 7px;
+}
+
+.active .bar__marker {
+    width: 10px;
+    height: 10px;
+    background: var(--orange);
+    border: 1px solid var(--grey);
+    border-radius: 100%;
+    position: absolute;
+    bottom: -21px;
 }
