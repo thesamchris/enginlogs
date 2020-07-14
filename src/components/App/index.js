@@ -12,6 +12,7 @@ import Header from  '../skeleton/header'
 import Categories from '../items/categories'
 import Messages from './messages'
 import HomePage from '../pages/home'
+import ItemsPage from '../pages/items/index'
 import DashboardPage from '../pages/dashboard'
 import withAuthProtection from './withAuthProtection'
 import Nav from '../skeleton/Nav'
@@ -120,6 +121,9 @@ class App extends Component {
 					<Nav authUser={authUser}/> */}
 					<Messages showMessage={this.state.showMessage} message={this.state.message}/>
 					<Switch>
+						<Route path="/items">
+							<ItemsPage items={items} />
+						</Route>
 						<Route path="/add" render={props => (<ProtectedAdd {...props} user={this.state.user} setMessage={this.setMessage}/>)} />
 						<Route path={SIGN_IN} component={SignIn}/>
 						<Route path={SIGN_UP} component={SignUp}/>

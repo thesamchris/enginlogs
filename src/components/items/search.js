@@ -1,4 +1,5 @@
 import React from 'react'
+import './search.css'
 
 class Search extends React.Component {
     constructor() {
@@ -31,7 +32,8 @@ class Search extends React.Component {
                 value={search}
                 onChange={this.onChange}
                 type="text"
-                placeholder="Search for item, category"
+                placeholder="Search for item ..."
+                className="search_input"
                 />
 
                 { searchResults }

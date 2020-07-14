@@ -1,0 +1,64 @@
+.items_page__content {
+    max-width: 420px;
+    width: 80vw;
+    margin: 25px auto;
+}
+
+.items_page__content section {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.items_page__title {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.items_page__category_card {
+    border: 1px solid var(--grey);
+    border-radius: 10px;
+    padding: 20px 20px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: var(--grey);
+    display: flex;
+    align-items: center;
+}
+
+.items_page__category_card strong {
+    text-transform: capitalize;
+}
+
+.category_card__image {
+    width: 24px;
+    height: 24px;
+}
+
+.sports {
+    background: url(../../../assets/basketball@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.electronics {
+    background: url(../../../assets/speaker@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.camp {
+    background: url(../../../assets/celebration@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.misc {
+    background: url(../../../assets/rule@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.grow {
+    flex-grow: 1;
+}
