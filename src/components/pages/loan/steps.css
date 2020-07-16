@@ -1,0 +1,83 @@
+.steps__container {
+    position: relative;
+    color: var(--grey);
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.steps__line {
+    width: 70%;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--grey); 
+    max-width: 235px;
+}
+
+.steps__icon_group {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    top: -4px;
+    margin: 0 auto;
+}
+
+.steps__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.steps__marker {
+    width: 10px;
+    height: 10px;
+    background: var(--grey);
+    border-radius: 100%;
+    margin: 0 auto;
+}
+
+.steps__active .steps__marker {
+    background: var(--orange);
+    border: 1px solid var(--grey);
+    margin-top: -1px;
+}
+
+.steps__image {
+    width: 18px;
+    height: 18px;
+    margin: 10px auto; 
+}
+
+.steps__step {
+    text-decoration: none;
+    width: 66.5px;
+}
+
+.steps__text {
+    color: var(--grey);
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 10px;
+}
+
+.steps__active .steps__text {
+    font-size: initial;
+}
+
+.steps__period {
+    background: url(../../../assets/calendar@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.steps__items {
+    background: url(../../../assets/items@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.steps__confirm {
+    background: url(../../../assets/tick@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}

@@ -5,6 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import AddInitial from '../addInitial'
 import Details from '../booking/details'
+import DetailsPage from '../pages/loan/details'
 import Cart from '../booking/cart'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Display from '../items/display'
@@ -121,6 +122,9 @@ class App extends Component {
 					<Nav authUser={authUser}/> */}
 					<Messages showMessage={this.state.showMessage} message={this.state.message}/>
 					<Switch>
+						<Route path="/loan">
+							<DetailsPage />
+						</Route>
 						<Route path="/items">
 							<ItemsPage items={items} />
 						</Route>
@@ -210,9 +214,6 @@ class App extends Component {
 								category="misc"
 								items={items}
 							/>
-						</Route>
-						<Route path="/loan">
-							<Categories items={items} isLoan={true} />
 						</Route>
 						<Route path="/view">
 							<Categories items={items} isLoan={false} />
