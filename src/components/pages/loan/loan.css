@@ -1,0 +1,131 @@
+.loan__content_container {
+    max-width: 420px;
+    margin: 100px auto;
+    
+}
+
+.loan_page__items_container {
+    max-height: 250px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.details__input_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loan__button {
+    text-transform: uppercase;
+    color: white;
+    border-radius: 15px;
+    padding: 5px 15px;
+    background: var(--orange);
+    box-shadow: 0px 2px 3px 0px grey;
+    border: 0px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.loan__button[disabled] {
+    background: darkgray;
+}
+
+.loan_page__item_card {
+    border: 1px solid var(--grey);
+    border-radius: 10px;
+    padding: 20px 20px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: var(--grey);
+    display: flex;
+    align-items: center;
+}
+
+.loan_page__item_card strong {
+    text-transform: capitalize;
+}
+
+.item_card__image {
+    width: 24px;
+    height: 24px;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.add {
+    background: url(../../../assets/plus@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.remove {
+    background: url(../../../assets/remove@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.view_cart__button {
+    background: white;
+    border: none;
+    color: var(--grey);
+    display: flex;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 auto 10px auto;
+}
+
+.view_cart__icon {
+    width: 18px;
+    height: 18px;
+    background: url(../../../assets/checkout@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+}
+
+.items_page___button_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.cart_container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    display: none;
+    top: -115px;
+}
+
+.cart_open {
+    display: flex;
+}
+
+.cart {
+    width: 200px;
+    background: white;
+    min-height: 100px;
+    box-shadow: 1px 1px 12px 0px;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+}
+
+.view_cart__container {
+    position: relative;
+    width: 100%;
+}

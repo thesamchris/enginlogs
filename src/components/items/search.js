@@ -14,7 +14,7 @@ class Search extends React.Component {
     }
     render() {
         const { search } = this.state
-        const { items } = this.props
+        const { items, mode } = this.props
         let relevantItems = []
         Object.keys(items).map(key => {
             let item = items[key]
@@ -25,18 +25,47 @@ class Search extends React.Component {
 
         let searchResults = relevantItems.map((item, key) => <li key={key}>{item.name}</li>)
 
+        let loanSearchResults = relevantItems.map((item, key) => {
+            let isInCart = false
+            return (
+                <button className="items_page__category_card">
+                    <strong>{ item.name }</strong>
+                    <div className="grow"></div>
+                    <div className={`category_card__image ${isInCart ? 'remove' : 'add'}`}></div>
+                </button>
+            )
+        })
+
         return  (
             <div>
-                <input
-                name="search"
-                value={search}
-                onChange={this.onChange}
-                type="text"
-                placeholder="Search for item ..."
-                className="search_input"
-                />
+                { mode =='loan' ? (
+                    <div>
+                        <input
+                        name="search"
+                        value={search}
+                        onChange={this.onChange}
+                        type="text"
+                        placeholder="Search for item ..."
+                        className="search_input"
+                        />
 
-                { searchResults }
+                        { loanSearchResults }
+                    </div>
+                ) : (
+                   <div>
+                       <input
+                        name="search"
+                        value={search}
+                        onChange={this.onChange}
+                        type="text"
+                        placeholder="Search for item ..."
+                        className="search_input"
+                        />
+
+                        { searchResults }
+                   </div>     
+                )}
+                
             </div>
         )
     }

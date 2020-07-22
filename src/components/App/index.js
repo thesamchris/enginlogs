@@ -21,6 +21,7 @@ import SignIn from '../pages/auth/SignIn'
 import SignUp from '../pages/auth/SignUp'
 import Search from '../items/search'
 import { SIGN_UP, SIGN_IN } from '../../constants/routes'
+import LoaningItems from '../pages/loan/items'
 
 class App extends Component {
 	constructor() {
@@ -42,6 +43,7 @@ class App extends Component {
 		this.selectItem = this.selectItem.bind(this)
 		this.setBookingDetails = this.setBookingDetails.bind(this)
 		this.setMessage = this.setMessage.bind(this)
+		this.removeItem = this.removeItem.bind(this)
 	}
 
 	componentDidMount() {
@@ -77,6 +79,14 @@ class App extends Component {
 				...this.state.selectedItems,
 				[key]: quantity
 			}
+		})
+	}
+
+	removeItem(key) {
+		let { selectedItems } = this.state
+		delete(selectedItems[key])
+		this.setState({
+			selectedItems
 		})
 	}
 
@@ -120,17 +130,52 @@ class App extends Component {
 				<div>
 					{/* <Header />
 					<Nav authUser={authUser}/> */}
-					<Messages showMessage={this.state.showMessage} message={this.state.message}/>
+					<Messages
+						showMessage={this.state.showMessage}
+						message={this.state.message}
+					/>
 					<Switch>
-						<Route path="/loan">
-							<DetailsPage />
+						<Route exact path="/loan">
+							<DetailsPage
+								selectedItems={selectedItems}
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								authUser={authUser}
+								setBookingDetails={this.setBookingDetails}
+								setMessage={this.setMessage}
+							/>
+						</Route>
+						<Route path="/loan/items">
+							<LoaningItems
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								items={items}
+								selectedItems={selectedItems}
+								selectItem={this.selectItem}
+								removeItem={this.removeItem}
+							/>
 						</Route>
 						<Route path="/items">
-							<ItemsPage items={items} />
+							<ItemsPage
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								selectItem={this.selectItem}
+								selectedItems={selectedItems}
+								items={items}
+							/>
 						</Route>
-						<Route path="/add" render={props => (<ProtectedAdd {...props} user={this.state.user} setMessage={this.setMessage}/>)} />
-						<Route path={SIGN_IN} component={SignIn}/>
-						<Route path={SIGN_UP} component={SignUp}/>
+						<Route
+							path="/add"
+							render={(props) => (
+								<ProtectedAdd
+									{...props}
+									user={this.state.user}
+									setMessage={this.setMessage}
+								/>
+							)}
+						/>
+						<Route path={SIGN_IN} component={SignIn} />
+						<Route path={SIGN_UP} component={SignUp} />
 						<Route path="/details">
 							<Details
 								selectedItems={selectedItems}
@@ -159,7 +204,7 @@ class App extends Component {
 						<Route path="/bookings">
 							<div>show bookings</div>
 						</Route>
-						<Route path="/view/sports">
+						{/* <Route path="/view/sports">
 							<Display items={items} category="sports" selectable={false} />
 						</Route>
 						<Route path="/view/electronics">
@@ -230,12 +275,17 @@ class App extends Component {
 						<Route path="/success">
 							<p>Successful booking! thanks!</p>
 						</Route>
+						 */}
 						<Route path="/dashboard">
-							<DashboardPage items={items} bookings={bookings} authUser={authUser}/>
+							<DashboardPage
+								items={items}
+								bookings={bookings}
+								authUser={authUser}
+							/>
 						</Route>
 						<Route path="/search">
-							<Search items={items}/>
-						</Route> 
+							<Search items={items} />
+						</Route>
 						<Route path="/">
 							<HomePage />
 						</Route>
