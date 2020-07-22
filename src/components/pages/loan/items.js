@@ -126,7 +126,7 @@ class SelectItemsToLoan extends React.Component {
                 </div>
                 <div className="items_page___button_container">
                     <ViewCart items={items} selectedItems={selectedItems}/>
-                    <Link className="loan__button" to="/loan/confirm">{"next >"}</Link>
+                    <Link disabled={!Object.keys(selectedItems).length} className="loan__button" to="/loan/confirm">{"next >"}</Link>
                 </div>
 			</div>
 		)
