@@ -22,6 +22,7 @@ import SignUp from '../pages/auth/SignUp'
 import Search from '../items/search'
 import { SIGN_UP, SIGN_IN } from '../../constants/routes'
 import LoaningItems from '../pages/loan/items'
+import ConfirmBooking from '../pages/loan/confirm'
 
 class App extends Component {
 	constructor() {
@@ -143,6 +144,15 @@ class App extends Component {
 								authUser={authUser}
 								setBookingDetails={this.setBookingDetails}
 								setMessage={this.setMessage}
+							/>
+						</Route>
+						<Route path="/loan/confirm">
+							<ConfirmBooking
+								selectedItems={selectedItems}
+								collectionDate={collectionDate}
+								returnDate={returnDate}
+								authUser={authUser}
+								setBookingDetails={this.setBookingDetails}
 							/>
 						</Route>
 						<Route path="/loan/items">
