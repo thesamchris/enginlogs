@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import './App.css'
 import { withFirebase } from '../Firebase'
-import firebase from 'firebase/app'
+// import firebase from 'firebase/app'
 import 'firebase/auth'
 import AddInitial from '../addInitial'
 import Details from '../booking/details'
 import DetailsPage from '../pages/loan/details'
 import Cart from '../booking/cart'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import Display from '../items/display'
-import Header from  '../skeleton/header'
-import Categories from '../items/categories'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+// import Display from '../items/display'
+// import Header from  '../skeleton/header'
+// import Categories from '../items/categories'
 import Messages from './messages'
 import HomePage from '../pages/home'
 import ItemsPage from '../pages/items/index'
 import DashboardPage from '../pages/dashboard'
 import withAuthProtection from './withAuthProtection'
-import Nav from '../skeleton/Nav'
+// import Nav from '../skeleton/Nav'
 import SignIn from '../pages/auth/SignIn'
 import SignUp from '../pages/auth/SignUp'
 import Search from '../items/search'
@@ -45,6 +45,8 @@ class App extends Component {
 		this.setBookingDetails = this.setBookingDetails.bind(this)
 		this.setMessage = this.setMessage.bind(this)
 		this.removeItem = this.removeItem.bind(this)
+		this.increaseQuantity = this.increaseQuantity.bind(this)
+		this.decreaseQuantity = this.decreaseQuantity.bind(this)
 	}
 
 	componentDidMount() {
@@ -89,6 +91,14 @@ class App extends Component {
 		this.setState({
 			selectedItems
 		})
+	}
+
+	increaseQuantity(key, max) {
+
+	}
+
+	decreaseQuantity(key) {
+
 	}
 
 	setBookingDetails(collectionDate, collectionTime, returnDate, returnTime, email) {
@@ -151,6 +161,9 @@ class App extends Component {
 								selectedItems={selectedItems}
 								collectionDate={collectionDate}
 								returnDate={returnDate}
+								items={items}
+								increaseQuantity={this.increaseQuantity}
+								decreaseQuantity={this.decreaseQuantity}
 								authUser={authUser}
 								setBookingDetails={this.setBookingDetails}
 							/>

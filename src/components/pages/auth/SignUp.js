@@ -33,7 +33,7 @@ class SignUpFormBase extends React.Component {
     }
 
     onSubmit = (event) => {
-        const { firstName, email, passwordOne } = this.state
+        const { email, passwordOne } = this.state
 
 				this.props.firebase
 					.doCreateUserWithEmailAndPassword(email, passwordOne)

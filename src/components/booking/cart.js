@@ -32,6 +32,7 @@ class Cart extends Component {
 		let { key: bookingId } = newBookingRef
 		newBookingRef.set(newBooking)
 		let j
+		// eslint-disable-next-line
 		Object.keys(newBooking.selectedItems).map(itemId => {
 			for (j = collectionDate; j <= returnDate; j.setDate(j.getDate() + 1)) {
 				let day = j.toISOString().substring(0, 10)

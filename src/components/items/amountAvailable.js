@@ -2,6 +2,7 @@ const amountAvailable = (itemData, collectionDate, returnDate) => {
     let lowestAmountAvailable = itemData.quantity
     let amountAvailableForDay, amountBookedForDay
     if (itemData.bookings) {
+        // eslint-disable-next-line
         Object.keys(itemData.bookings).map(day => {
             let currentDayBookings = itemData.bookings[day]
             let currentDay = new Date(day)
@@ -9,6 +10,7 @@ const amountAvailable = (itemData, collectionDate, returnDate) => {
             let maxDate = new Date(returnDate)
             if(currentDay >= minDate && currentDay <= maxDate) {
                 amountBookedForDay = 0
+                // eslint-disable-next-line
                 Object.keys(currentDayBookings).map(bookingId => {
                     amountBookedForDay += parseInt(currentDayBookings[bookingId])
                 })

@@ -81,7 +81,8 @@ class SelectItemsToLoan extends React.Component {
         
         const { search } = this.state
 
-        let relevantItems = (search === '' ? items : {})
+		let relevantItems = (search === '' ? items : {})
+		// eslint-disable-next-line
         Object.keys(items).map((key) => {
             let item = items[key]
             if (

@@ -80,7 +80,7 @@ class DetailsPage extends React.Component {
 	}
 
 	render() {
-        let { error, message } = this.state
+        // let { error, message } = this.state
         let {
             collectionDate,
             collectionTime,

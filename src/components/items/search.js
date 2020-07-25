@@ -16,6 +16,7 @@ class Search extends React.Component {
         const { search } = this.state
         const { items, mode } = this.props
         let relevantItems = []
+        // eslint-disable-next-line
         Object.keys(items).map(key => {
             let item = items[key]
             if (search && (item.name.toLowerCase().includes(search.toLowerCase()) || item.category.toLowerCase().includes(search.toLowerCase())))
@@ -38,7 +39,7 @@ class Search extends React.Component {
 
         return  (
             <div>
-                { mode =='loan' ? (
+                { mode === 'loan' ? (
                     <div>
                         <input
                         name="search"

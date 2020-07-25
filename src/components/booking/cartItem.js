@@ -54,8 +54,6 @@ class CartItem extends Component {
     render() {
        let {
             itemData,
-            id,
-            selectItem,
             collectionDate,
             returnDate,
             haveDateRange
