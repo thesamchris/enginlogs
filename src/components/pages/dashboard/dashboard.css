@@ -18,6 +18,8 @@
 
 .dashboard__bookings {
     margin-top: 20px;
+    display: flex;
+    overflow-x: scroll;
 }
 
 .dashboard__title {

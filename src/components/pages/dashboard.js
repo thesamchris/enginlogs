@@ -37,7 +37,7 @@ class Dashboard extends React.Component {
 							<section>
 								<span className="dashboard__title">BOOKINGS</span>
 								<div className="dashboard__bookings">
-									{userBookings ? userBookings : 'loading'}
+									{userBookings ? userBookings : 'no bookings'}
 								</div>
 							</section>
 							<section>
