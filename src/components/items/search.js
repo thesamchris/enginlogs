@@ -13,7 +13,8 @@ class Search extends React.Component {
         this.setState({ [event.target.name]: event.target.value })
     }
     render() {
-        const { search } = this.state
+        const { search: stateSearch } = this.state
+        const { search, onChange } = this.props
         const { items, mode } = this.props
         let relevantItems = []
         // eslint-disable-next-line
@@ -24,7 +25,7 @@ class Search extends React.Component {
         })
 
 
-        let searchResults = relevantItems.map((item, key) => <li key={key}>{item.name}</li>)
+        let searchResults = relevantItems.map((item, key) => <li key={key}>{item.name} ({item.quantity} units)</li>)
 
         let loanSearchResults = relevantItems.map((item, key) => {
             let isInCart = false
@@ -43,27 +44,29 @@ class Search extends React.Component {
                     <div>
                         <input
                         name="search"
-                        value={search}
+                        value={stateSearch}
                         onChange={this.onChange}
                         type="text"
                         placeholder="Search for item ..."
                         className="search_input"
                         />
-
-                        { loanSearchResults }
+                        <div className="search__results">
+                            { loanSearchResults }
+                        </div>
                     </div>
                 ) : (
                    <div>
                        <input
                         name="search"
                         value={search}
-                        onChange={this.onChange}
+                        onChange={onChange}
                         type="text"
                         placeholder="Search for item ..."
                         className="search_input"
                         />
-
-                        { searchResults }
+                        <div className="search__results">
+                            { searchResults }
+                        </div>
                    </div>     
                 )}
                 

@@ -9,3 +9,8 @@
     color: var(--grey);
     margin-bottom: 10px;
 }
+
+.search__results {
+    overflow-y: scroll;
+    max-height: 100px;
+}

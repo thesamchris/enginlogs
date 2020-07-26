@@ -16,16 +16,20 @@ class Dashboard extends React.Component {
     render() {
         let { authUser, bookings, items } = this.props
         let email = authUser ? authUser.email : 'loading@loading.com'
-        // eslint-disable-next-line
-        let userBookings = Object.keys(bookings).map(key => {
-            let booking = bookings[key] 
-            let itemNames = Object.keys(booking.selectedItems).map(key => {
-                return <li key={key}>{items[key].name}</li>
+        let userBookings
+        if (bookings) {
+            // eslint-disable-next-line
+            userBookings = Object.keys(bookings).map(key => {
+                let booking = bookings[key] 
+                let itemNames = Object.keys(booking.selectedItems).map(key => {
+                    return <li key={key}>{items[key].name}</li>
+                })
+                if (booking.email === email) {
+                    return <Booking key={key} id={key} date={booking.returnDate} itemNames={itemNames}/>
+                }
             })
-            if (booking.email === email) {
-                return <Booking key={key} id={key} date={booking.returnDate} itemNames={itemNames}/>
-            }
-        })
+        } else 
+            userBookings = 'No bookings yet.'
         return (
 					<div className="dashboard__container user__container">
 						<div className="user__logo"></div>

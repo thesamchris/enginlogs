@@ -24,6 +24,9 @@
     color: var(--grey);
     display: flex;
     align-items: center;
+    width: 100%;
+    background: white;
+    cursor: pointer;
 }
 
 .items_page__category_card strong {
