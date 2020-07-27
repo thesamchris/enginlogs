@@ -31,8 +31,12 @@
     color: var(--grey);
     text-transform: capitalize;
     display: flex;
-    /* justify-content: center; */
     margin-top: 15px;
+    background: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 
 .dashboard__link_image {

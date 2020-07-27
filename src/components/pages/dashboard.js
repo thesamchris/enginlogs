@@ -4,6 +4,7 @@ import BottomBar from '../skeleton/bottomBar'
 import Booking from './dashboard/booking'
 import { Link } from 'react-router-dom'
 import './dashboard/dashboard.css'
+import SignOut from './auth/SignOut'
 
 class Dashboard extends React.Component {
     constructor() {
@@ -46,10 +47,10 @@ class Dashboard extends React.Component {
 							</section>
 							<section>
 								<span className="dashboard__title">what would you like to do?</span>
-                                <Link to="/account" className="dashboard__link">
+                                <SignOut>
                                     <div className="dashboard__link_image account"></div>
-                                    account
-                                </Link>
+                                    sign out
+                                </SignOut>
                                 <Link to="/items" className="dashboard__link">
                                     <div className="dashboard__link_image search"></div>
                                     find an item
