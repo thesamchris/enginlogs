@@ -146,8 +146,8 @@ class App extends Component {
 		let collectionDate = new Date(collectionDateText)
 		let returnDate = new Date(returnDateText)
 		let newBooking = {
-			collectionDate,
-			returnDate,
+			collectionDate: collectionDateText,
+			returnDate: returnDateText,
 			selectedItems,
 			collectionTime,
 			returnTime,
@@ -239,6 +239,11 @@ class App extends Component {
 		let haveDateRange = collectionDate && returnDate
 
 		const ProtectedAdd = withAuthProtection('/')(AddInitial)
+		// const ProtectedDashboard = withAuthProtection('/')(DashboardPage)
+		// const ProtectedDetailsPage = withAuthProtection('/')(DetailsPage)
+		// const ProtectedConfirmBooking = withAuthProtection('/')(ConfirmBooking)
+		// const ProtectedLoaningItems = withAuthProtection('/')(LoaningItems)
+		// const ProtectedItemsPage = withAuthProtection('/')(ItemsPage)
 
 		return (
 			<Router>
@@ -250,48 +255,6 @@ class App extends Component {
 						message={this.state.message}
 					/>
 					<Switch>
-						<Route exact path="/loan">
-							<DetailsPage
-								selectedItems={selectedItems}
-								collectionDate={collectionDate}
-								returnDate={returnDate}
-								authUser={authUser}
-								setBookingDetails={this.setBookingDetails}
-								setMessage={this.setMessage}
-							/>
-						</Route>
-						<Route path="/loan/confirm">
-							<ConfirmBooking
-								selectedItems={selectedItems}
-								collectionDate={collectionDate}
-								returnDate={returnDate}
-								items={items}
-								increaseQuantity={this.increaseQuantity}
-								decreaseQuantity={this.decreaseQuantity}
-								authUser={authUser}
-								setBookingDetails={this.setBookingDetails}
-								newBooking={this.newBooking}
-							/>
-						</Route>
-						<Route path="/loan/items">
-							<LoaningItems
-								collectionDate={collectionDate}
-								returnDate={returnDate}
-								items={items}
-								selectedItems={selectedItems}
-								selectItem={this.selectItem}
-								removeItem={this.removeItem}
-							/>
-						</Route>
-						<Route path="/items">
-							<ItemsPage
-								collectionDate={collectionDate}
-								returnDate={returnDate}
-								selectItem={this.selectItem}
-								selectedItems={selectedItems}
-								items={items}
-							/>
-						</Route>
 						<Route
 							path="/add"
 							render={(props) => (
@@ -302,7 +265,78 @@ class App extends Component {
 								/>
 							)}
 						/>
-						<Route path={SIGN_IN} component={SignIn} />
+						<Route
+							path="/dashboard"
+							render={(props) => (
+								<DashboardPage
+									{...props}
+									items={items}
+									bookings={bookings}
+									authUser={authUser}
+								/>
+							)}
+						/>
+						<Route
+							path="/loan/confirm"
+							render={(props) => (
+								<ConfirmBooking
+									{...props}
+									selectedItems={selectedItems}
+									collectionDate={collectionDate}
+									returnDate={returnDate}
+									items={items}
+									increaseQuantity={this.increaseQuantity}
+									decreaseQuantity={this.decreaseQuantity}
+									authUser={authUser}
+									setBookingDetails={this.setBookingDetails}
+									newBooking={this.newBooking}
+								/>
+							)}
+						/>
+						<Route
+							path="/loan"
+							exact
+							render={(props) => (
+								<DetailsPage
+									{...props}
+									selectedItems={selectedItems}
+									collectionDate={collectionDate}
+									returnDate={returnDate}
+									authUser={authUser}
+									setBookingDetails={this.setBookingDetails}
+									setMessage={this.setMessage}
+								/>
+							)}
+						/>
+						<Route
+							path="/loan/items"
+							render={(props) => (
+								<LoaningItems
+									{...props}
+									collectionDate={collectionDate}
+									returnDate={returnDate}
+									items={items}
+									selectedItems={selectedItems}
+									selectItem={this.selectItem}
+									removeItem={this.removeItem}
+								/>
+							)}
+						/>
+						<Route
+							path="/items"
+							render={(props) => (
+								<ItemsPage
+									{...props}
+									collectionDate={collectionDate}
+									returnDate={returnDate}
+									selectItem={this.selectItem}
+									selectedItems={selectedItems}
+									items={items}
+								/>
+							)}
+						/>
+
+						<Route exact path={SIGN_IN} component={SignIn} />
 						<Route path={SIGN_UP} component={SignUp} />
 						<Route path="/details">
 							<Details
@@ -329,9 +363,9 @@ class App extends Component {
 								returnTime={returnTime}
 							/>
 						</Route>
-						<Route path="/bookings">
+						{/* <Route path="/bookings">
 							<div>show bookings</div>
-						</Route>
+						</Route> */}
 						{/* <Route path="/view/sports">
 							<Display items={items} category="sports" selectable={false} />
 						</Route>
@@ -404,17 +438,11 @@ class App extends Component {
 							<p>Successful booking! thanks!</p>
 						</Route>
 						 */}
-						<Route path="/dashboard">
-							<DashboardPage
-								items={items}
-								bookings={bookings}
-								authUser={authUser}
-							/>
-						</Route>
+
 						<Route path="/search">
 							<Search items={items} />
 						</Route>
-						<Route path="/">
+						<Route exact path="/">
 							<HomePage />
 						</Route>
 					</Switch>
