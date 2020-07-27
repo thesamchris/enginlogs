@@ -26,6 +26,7 @@ class DetailsPage extends React.Component {
 		e.preventDefault()
 		let collectionDate = new Date(this.state.collectionDate)
 		let returnDate = new Date(this.state.returnDate)
+		let { collectionTime, returnTime } = this.state
 		let today = new Date()
 		let numberOfDays = 0
 		let i
@@ -53,6 +54,13 @@ class DetailsPage extends React.Component {
 			return this.props.setMessage(
 				'Collection date cannot be today or before today'
 			)
+		}
+
+		let collectionTimeInt = parseInt((collectionTime).replace(/:/g,''))
+		let returnTimeInt = parseInt((returnTime).replace(/:/g,''))
+
+		if (this.areSameDay(collectionDateOriginal, returnDate) && returnTimeInt <= collectionTimeInt) {
+			return this.props.setMessage('Return time must be after collection time')
 		}
 
 		this.props.setBookingDetails(
