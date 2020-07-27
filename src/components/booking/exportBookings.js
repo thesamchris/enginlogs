@@ -45,13 +45,14 @@ class ExportBookings extends React.Component {
                 let bookingCollection = new Date(booking.collectionDate)
                 let bookingReturn = new Date(booking.returnDate)
                 
-                if (toDate < fromDate)
+                if (toDate < fromDate) {
                 // eslint-disable-next-line
                     return
-
-                if (!bookingCollection || !bookingCollection)
+                }
+                if (!bookingCollection || !bookingCollection) {
                 // eslint-disable-next-line
                     return
+                }
                 if ((bookingCollection <= toDate) && (bookingReturn >= fromDate)) {
                     count++
                     return filteredBookings.push({
