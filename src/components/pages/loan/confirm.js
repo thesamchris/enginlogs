@@ -4,6 +4,7 @@ import Steps from './steps'
 import BottomBar from '../../skeleton/bottomBar'
 import './loan.css'
 import amountAvailable from '../../items/amountAvailable'
+import withAuthorization from '../../App/withAuthorization'
 
 class ConfirmBookingPage extends React.Component {
     render() {
@@ -126,4 +127,7 @@ const ConfirmedItem = ({ itemId, name, increaseQuantity, decreaseQuantity, quant
         </div>
     </div>
 )
-export default ConfirmBookingPage
+
+const condition = (authUser) => !!authUser
+
+export default withAuthorization(condition)(ConfirmBookingPage)

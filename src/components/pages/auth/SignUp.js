@@ -5,6 +5,8 @@ import { compose } from 'recompose'
 import { SIGN_UP, DASHBOARD } from '../../../constants/routes'
 import { withFirebase } from '../../Firebase'
 
+import withAuthorization from '../../App/withAuthorization'
+
 import './auth.css'
 
 const INITIAL_STATE = {
@@ -81,10 +83,12 @@ const SignUpLink = () => (
     </p>
 )
 
+const condition = (authUser) => !authUser
+
 const SignUpForm = compose(
     withRouter,
     withFirebase,
 )(SignUpFormBase)
 
-export default SignUp
+export default withAuthorization(condition, '/dashboard')(SignUp)
 export { SignUpForm, SignUpLink }

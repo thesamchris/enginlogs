@@ -3,6 +3,7 @@ import { withFirebase } from '../Firebase'
 import BottomBar from '../skeleton/bottomBar'
 import Booking from './dashboard/booking'
 import { Link } from 'react-router-dom'
+import withAuthorization from '../App/withAuthorization'
 import './dashboard/dashboard.css'
 import SignOut from './auth/SignOut'
 
@@ -63,4 +64,6 @@ class Dashboard extends React.Component {
     }
 }
 
-export default withFirebase(Dashboard)
+const condition = (authUser) => !!authUser
+
+export default withAuthorization(condition)(withFirebase(Dashboard))

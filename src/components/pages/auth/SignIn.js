@@ -5,6 +5,7 @@ import { compose } from 'recompose'
 import { SignUpLink } from './SignUp'
 import { withFirebase } from '../../Firebase'
 import * as ROUTES from '../../../constants/routes'
+import withAuthorization from '../../App/withAuthorization'
 import './auth.css'
  
 const SignInPage = () => (
@@ -82,11 +83,14 @@ class SignInFormBase extends Component {
   }
 }
  
+const condition = (authUser) => !authUser
+
 const SignInForm = compose(
   withRouter,
   withFirebase,
 )(SignInFormBase)
  
-export default SignInPage
+export default withAuthorization(condition, '/dashboard')(SignInPage)
  
 export { SignInForm }
+

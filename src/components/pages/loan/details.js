@@ -1,6 +1,7 @@
 import React from 'react'
 import BottomBar from '../../skeleton/bottomBar'
 import { withRouter } from 'react-router'
+import withAuthorization from '../../App/withAuthorization'
 import Steps from './steps'
 import './loan.css'
 
@@ -166,4 +167,6 @@ class DetailsPage extends React.Component {
 	}
 }
 
-export default withRouter(DetailsPage)
+const condition = (authUser) => !!authUser
+
+export default withAuthorization(condition)(withRouter(DetailsPage))

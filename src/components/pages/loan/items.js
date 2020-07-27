@@ -8,6 +8,7 @@ import './loan.css'
 import '../../items/search.css'
 import amountAvailable from '../../items/amountAvailable'
 import ViewCart from './viewCart'
+import withAuthorization from '../../App/withAuthorization'
 
 const MessageToSetLoaningPeriod = () => (
     <div style={{
@@ -134,5 +135,6 @@ class SelectItemsToLoan extends React.Component {
 	}
 }
 
+const condition = (authUser) => !!authUser
 
-export default withFirebase(withRouter(LoaningItems))
+export default withAuthorization(condition)(withFirebase(withRouter(LoaningItems)))

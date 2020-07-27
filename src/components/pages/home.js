@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import withAuthorization from '../App/withAuthorization'
 import './home.css'
 const HomePage = () => (
     <div className="mobile__bg">
@@ -12,4 +13,6 @@ const HomePage = () => (
     </div>
 )
 
-export default HomePage
+const condition = (authUser) => !authUser
+
+export default withAuthorization(condition, '/dashboard')(HomePage)

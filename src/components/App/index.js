@@ -4,9 +4,9 @@ import { withFirebase } from '../Firebase'
 // import firebase from 'firebase/app'
 import 'firebase/auth'
 import AddInitial from '../addInitial'
-import Details from '../booking/details'
+// import Details from '../booking/details'
 import DetailsPage from '../pages/loan/details'
-import Cart from '../booking/cart'
+// import Cart from '../booking/cart'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import Display from '../items/display'
 // import Header from  '../skeleton/header'
@@ -15,11 +15,11 @@ import Messages from './messages'
 import HomePage from '../pages/home'
 import ItemsPage from '../pages/items/index'
 import DashboardPage from '../pages/dashboard'
-import withAuthProtection from './withAuthProtection'
+// import withAuthProtection from './withAuthProtection'
 // import Nav from '../skeleton/Nav'
 import SignIn from '../pages/auth/SignIn'
 import SignUp from '../pages/auth/SignUp'
-import Search from '../items/search'
+// import Search from '../items/search'
 import { SIGN_UP, SIGN_IN } from '../../constants/routes'
 import LoaningItems from '../pages/loan/items'
 import ConfirmBooking from '../pages/loan/confirm'
@@ -227,23 +227,16 @@ class App extends Component {
 		let {
 			selectedItems,
 			collectionDate,
-			collectionTime,
-			returnTime,
+			// collectionTime,
+			// returnTime,
 			returnDate,
-			email,
+			// email,
 			items,
-			loading,
+			// loading,
 			authUser,
 			bookings,
 		} = this.state
-		let haveDateRange = collectionDate && returnDate
-
-		const ProtectedAdd = withAuthProtection('/')(AddInitial)
-		// const ProtectedDashboard = withAuthProtection('/')(DashboardPage)
-		// const ProtectedDetailsPage = withAuthProtection('/')(DetailsPage)
-		// const ProtectedConfirmBooking = withAuthProtection('/')(ConfirmBooking)
-		// const ProtectedLoaningItems = withAuthProtection('/')(LoaningItems)
-		// const ProtectedItemsPage = withAuthProtection('/')(ItemsPage)
+		// let haveDateRange = collectionDate && returnDate
 
 		return (
 			<Router>
@@ -258,7 +251,7 @@ class App extends Component {
 						<Route
 							path="/add"
 							render={(props) => (
-								<ProtectedAdd
+								<AddInitial
 									{...props}
 									user={this.state.user}
 									setMessage={this.setMessage}
@@ -338,7 +331,7 @@ class App extends Component {
 
 						<Route exact path={SIGN_IN} component={SignIn} />
 						<Route path={SIGN_UP} component={SignUp} />
-						<Route path="/details">
+						{/* <Route path="/details">
 							<Details
 								selectedItems={selectedItems}
 								collectionDate={collectionDate}
@@ -347,8 +340,8 @@ class App extends Component {
 								setBookingDetails={this.setBookingDetails}
 								setMessage={this.setMessage}
 							/>
-						</Route>
-						<Route path="/cart">
+						</Route> */}
+						{/* <Route path="/cart">
 							<Cart
 								selectItem={this.selectItem}
 								selectedItems={selectedItems}
@@ -362,7 +355,7 @@ class App extends Component {
 								collectionTime={collectionTime}
 								returnTime={returnTime}
 							/>
-						</Route>
+						</Route> */}
 						{/* <Route path="/bookings">
 							<div>show bookings</div>
 						</Route> */}
@@ -439,9 +432,9 @@ class App extends Component {
 						</Route>
 						 */}
 
-						<Route path="/search">
+						{/* <Route path="/search">
 							<Search items={items} />
-						</Route>
+						</Route> */}
 						<Route exact path="/">
 							<HomePage />
 						</Route>

@@ -1,4 +1,5 @@
 import React from 'react'
+import withAuthorization from '../App/withAuthorization'
 
 class AddIntialForm extends React.Component {
     constructor() {
@@ -79,4 +80,6 @@ class AddIntialForm extends React.Component {
     }
 }
 
-export default AddIntialForm
+const condition = (authUser) => !!authUser
+
+export default withAuthorization(condition)(AddIntialForm)

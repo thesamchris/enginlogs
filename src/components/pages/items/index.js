@@ -1,6 +1,7 @@
 import React from 'react'
 import BottomBar from '../../skeleton/bottomBar'
 import Search from '../../items/search'
+import withAuthorization from '../../App/withAuthorization'
 import './items.css'
 
 class ItemsPage extends React.Component {
@@ -83,4 +84,6 @@ class ItemsPage extends React.Component {
 	}
 }
 
-export default ItemsPage
+const condition = (authUser) => !!authUser
+
+export default withAuthorization(condition)(ItemsPage)
