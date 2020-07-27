@@ -1,0 +1,26 @@
+table {
+    border: 1px solid #dee2e6;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+thead th {
+    border-bottom-width: 2px;
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    border: 1px solid #dee2e6;
+}
+
+th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+td {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}

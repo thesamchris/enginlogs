@@ -24,6 +24,7 @@ import { SIGN_UP, SIGN_IN } from '../../constants/routes'
 import LoaningItems from '../pages/loan/items'
 import ConfirmBooking from '../pages/loan/confirm'
 import axios from 'axios'
+import ExportBookings from '../booking/exportBookings'
 
 class App extends Component {
 	constructor() {
@@ -248,6 +249,12 @@ class App extends Component {
 						message={this.state.message}
 					/>
 					<Switch>
+						<Route
+							path="/export"
+							render={(props) => (
+								<ExportBookings setMessage={this.setMessage} items={items}/>
+							)} 
+						/>
 						<Route
 							path="/add"
 							render={(props) => (
