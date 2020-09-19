@@ -36,10 +36,12 @@ class DetailsPage extends React.Component {
 				break
 			}
 		}
+
+		// 19 September 2020, Removed 1 Week Limit after discussion
 		// error if: 1. collect and return more than a week apart, 2. if return is before collection
-		if (numberOfDays > 7) {
-			return this.props.setMessage('Cannot loan for more than a week')
-		}
+		// if (numberOfDays > 7) {
+		// 	return this.props.setMessage('Cannot loan for more than a week')
+		// }
 
 		let collectionDateOriginal = new Date(this.state.collectionDate)
 		if (returnDate < collectionDateOriginal) {
