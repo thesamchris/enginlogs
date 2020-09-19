@@ -22,6 +22,8 @@ class Firebase {
 
 	loaners = () => this.db.ref('loaners')
 
+	adminSettings = () => this.db.ref('adminSettings')
+
 	loaner = (telegramHandle) => this.db.ref('loaners').child(telegramHandle)
 
 	bookItem = (uid, day) =>

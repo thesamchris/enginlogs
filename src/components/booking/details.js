@@ -76,7 +76,7 @@ class Details extends Component {
 	render() {
 		let { error, message } = this.state
 		let { collectionDate, collectionTime, returnDate, returnTime, email } = this.state
-		let canSubmit = collectionDate && collectionTime && returnDate && returnTime && email 
+		let canSubmit = collectionDate && collectionTime && returnDate && returnTime && email
 		return (
 			<div className="details__container">
 				{error ? <h1>{message}</h1> : ''}
@@ -91,13 +91,7 @@ class Details extends Component {
 					/>
 					<label className="input__label" htmlFor="collectionTime">Collection Time</label>
 					<select id="collectionTime" onChange={this.updateState} value={this.state.collectionTime}>
-						<option value="12:00">12:00</option>
-						<option value="12:15">12:15</option>
-						<option value="12:30">12:30</option>
-						<option value="13:00">13:00</option>
-						<option value="13:15">13:15</option>
-						<option value="13:30">13:30</option>
-						<option value="13:45">13:45</option>
+						
                 	</select>
 				</div>
 				<div className="input__container">

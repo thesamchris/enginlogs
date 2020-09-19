@@ -25,6 +25,7 @@ import LoaningItems from '../pages/loan/items'
 import ConfirmBooking from '../pages/loan/confirm'
 import axios from 'axios'
 import ExportBookings from '../booking/exportBookings'
+import GlobalSettings from '../pages/loan/globalSettings'
 
 class App extends Component {
 	constructor() {
@@ -42,6 +43,7 @@ class App extends Component {
 			message: '',
 			showMessage: false,
 			authUser: null,
+			adminSettings: {}
 		}
 		this.selectItem = this.selectItem.bind(this)
 		this.setBookingDetails = this.setBookingDetails.bind(this)
@@ -51,6 +53,16 @@ class App extends Component {
 		this.decreaseQuantity = this.decreaseQuantity.bind(this)
 		this.newBooking = this.newBooking.bind(this)
 		this.sendConfirmationEmail = this.sendConfirmationEmail.bind(this)
+		this.updateCollectionAndReturnTimings = this.updateCollectionAndReturnTimings.bind(this)
+	}
+
+	updateCollectionAndReturnTimings(collectionTimeStart, collectionTimeEnd, returnTimeStart, returnTimeEnd, collectionTimeSameAsReturnTime) {
+		let adminSettingsRef = this.props.firebase.adminSettings().child('timings')
+		adminSettingsRef.child('collectionTimeStart').set(collectionTimeStart)
+		adminSettingsRef.child('collectionTimeEnd').set(collectionTimeEnd)
+		adminSettingsRef.child('returnTimeStart').set(returnTimeStart)
+		adminSettingsRef.child('returnTimeEnd').set(returnTimeEnd)
+		adminSettingsRef.child('collectionTimeSameAsReturnTime').set(collectionTimeSameAsReturnTime)
 	}
 
 	componentDidMount() {
@@ -71,6 +83,12 @@ class App extends Component {
 
 		this.listener = this.props.firebase.auth.onAuthStateChanged((authUser) => {
 			authUser ? this.setState({ authUser }) : this.setState({ authUser: null })
+		})
+
+		this.props.firebase.adminSettings().on('value', (snap) => {
+			this.setState({
+				adminSettings: snap.val()
+			})
 		})
 	}
 
@@ -236,6 +254,7 @@ class App extends Component {
 			// loading,
 			authUser,
 			bookings,
+			adminSettings,
 		} = this.state
 		// let haveDateRange = collectionDate && returnDate
 
@@ -305,6 +324,7 @@ class App extends Component {
 									authUser={authUser}
 									setBookingDetails={this.setBookingDetails}
 									setMessage={this.setMessage}
+									adminSettings={adminSettings}
 								/>
 							)}
 						/>
@@ -321,6 +341,12 @@ class App extends Component {
 									removeItem={this.removeItem}
 								/>
 							)}
+						/>
+						<Route
+							path="/loan/settings"
+							render={(props) => (
+								<GlobalSettings updateCollectionAndReturnTimings={this.updateCollectionAndReturnTimings}/>
+							)} 
 						/>
 						<Route
 							path="/items"

@@ -20,6 +20,9 @@ class DetailsPage extends React.Component {
 		this.validateDateRange = this.validateDateRange.bind(this)
 		this.updateState = this.updateState.bind(this)
 		this.areSameDay = this.areSameDay.bind(this)
+		this.generateCollectionTimingOptionsForBooking = this.generateCollectionTimingOptionsForBooking.bind(this)
+
+		console.log('hi')
 	}
 
 	validateDateRange(e) {
@@ -90,17 +93,33 @@ class DetailsPage extends React.Component {
 		})
 	}
 
+	generateCollectionTimingOptionsForBooking(timings = {}) {
+		let { collectionTimeStart, collectionTimeEnd, returnTimeStart, returnTimeEnd, collectionTimeSameAsReturnTime } = timings
+		let difference = parseInt(collectionTimeEnd) - parseInt(collectionTimeStart)
+		let interval = 15
+		let maxIncrement = difference - (2*interval)
+		let timingOptionsValues = []
+		let i
+		for (i= 0; i <= maxIncrement; i += interval) { 
+			timingOptionsValues.push(parseInt(collectionTimeStart) + i%60 + (Math.floor(i / 60) * 100))
+		}
+
+		return timingOptionsValues.map((time, index) => <option key={index} value={time}>{time}</option>)
+	}
+
 	render() {
         // let { error, message } = this.state
         let {
             collectionDate,
             collectionTime,
             returnDate,
-            returnTime,
+			returnTime,
 		} = this.state
-		let { authUser } = this.props
+		let { authUser, adminSettings } = this.props
         let canSubmit =
-            collectionDate && collectionTime && returnDate && returnTime && authUser.email 
+			collectionDate && collectionTime && returnDate && returnTime && authUser.email 
+		let collectionTimingOptions = this.generateCollectionTimingOptionsForBooking(adminSettings.timings) 
+		
 		return (
 			<div className="loan__container user__container">
 				<div className="user__logo"></div>
@@ -125,13 +144,7 @@ class DetailsPage extends React.Component {
 							onChange={this.updateState}
 							value={this.state.collectionTime}
 						>
-							<option value="12:00">12:00</option>
-							<option value="12:15">12:15</option>
-							<option value="12:30">12:30</option>
-							<option value="13:00">13:00</option>
-							<option value="13:15">13:15</option>
-							<option value="13:30">13:30</option>
-							<option value="13:45">13:45</option>
+							{ collectionTimingOptions }
 						</select>
 					</div>
 					<div className="input__container">
@@ -153,13 +166,7 @@ class DetailsPage extends React.Component {
 							onChange={this.updateState}
 							value={this.state.returnTime}
 						>
-							<option value="12:00">12:00</option>
-							<option value="12:15">12:15</option>
-							<option value="12:30">12:30</option>
-							<option value="13:00">13:00</option>
-							<option value="13:15">13:15</option>
-							<option value="13:30">13:30</option>
-							<option value="13:45">13:45</option>
+							{ collectionTimingOptions }
 						</select>
 					</div>
 
