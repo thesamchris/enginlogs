@@ -26,6 +26,7 @@ import ConfirmBooking from '../pages/loan/confirm'
 import axios from 'axios'
 import ExportBookings from '../booking/exportBookings'
 import GlobalSettings from '../pages/loan/globalSettings'
+import BookingRequests from '../booking/requests'
 
 class App extends Component {
 	constructor() {
@@ -54,6 +55,10 @@ class App extends Component {
 		this.newBooking = this.newBooking.bind(this)
 		this.sendConfirmationEmail = this.sendConfirmationEmail.bind(this)
 		this.updateCollectionAndReturnTimings = this.updateCollectionAndReturnTimings.bind(this)
+		this.updateBookingStatus = this.updateBookingStatus.bind(this)
+		this.approveBooking = this.approveBooking.bind(this)
+		this.rejectBooking = this.rejectBooking.bind(this)
+		this.deleteBooking = this.deleteBooking.bind(this)
 	}
 
 	updateCollectionAndReturnTimings(collectionTimeStart, collectionTimeEnd, returnTimeStart, returnTimeEnd, collectionTimeSameAsReturnTime) {
@@ -243,6 +248,67 @@ class App extends Component {
 		setTimeout(() => this.setState({ showMessage: false }), 5000)
 	}
 
+	approveBooking(bookingId, message) {
+		this.props.firebase.particularBooking(bookingId).update({
+			status: 'Approved',
+			statusMessage: message
+		})
+	}
+
+	rejectBooking(bookingId, message) {
+		this.props.firebase.particularBooking(bookingId).update({
+			status: 'Rejected',
+			statusMessage: message
+		})
+
+		this.deleteBooking(bookingId, message)
+	}
+
+	deleteBooking(bookingId, message, updateDeleted = false) {
+
+		this.props.firebase.particularBooking(bookingId).on('value', (snap) => {
+			let booking = snap.val()
+			let newBookings
+			Object.keys(booking.selectedItems).map(key => {
+				this.props.firebase.particularItemBookings(key).on('value', snap => {
+					let oldBookings = snap.val()
+					Object.keys(oldBookings).map(dayKey => {
+						let dayObject = oldBookings[dayKey] 
+						newBookings = {
+							...newBookings,
+							[dayKey]: {
+								...dayObject,
+								[bookingId]: 0
+							}
+						}
+					})
+					this.props.firebase.particularItemBookings(key).set(newBookings)
+				})
+			})
+		})
+
+		if (updateDeleted) {
+			this.props.firebase.particularBooking(bookingId).update({
+				status: 'Deleted',
+				statusMessage: message
+			})
+		}
+	}
+
+	updateBookingStatus(bookingId, newStatus, message) {
+		switch(newStatus) {
+			case "Approved":
+				this.approveBooking(bookingId, message)
+				break;
+			case "Rejected":
+				this.rejectBooking(bookingId, message)
+				break;
+			case "Delete":
+				this.deleteBooking(bookingId, message, true)
+				break;
+		}
+	}
+
 	render() {
 		let {
 			selectedItems,
@@ -269,6 +335,16 @@ class App extends Component {
 						message={this.state.message}
 					/>
 					<Switch>
+						<Route
+							path="/requests"
+							render={() => (
+								<BookingRequests
+									bookings={bookings}
+									items={items}
+									updateBookingStatus={this.updateBookingStatus}
+								/>
+							)}
+						/>
 						<Route
 							path="/export"
 							render={(props) => (

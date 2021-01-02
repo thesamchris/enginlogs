@@ -33,6 +33,8 @@ class Firebase {
 
 	particularBooking = (uid) => this.db.ref('bookings').child(uid)
 
+	particularItemBookings = (uid) => this.db.ref('initial').child(uid).child('bookings')
+
 	doSignIn = () => {
 		let provider = new this.auth.GoogleAuthProvider()
 		this.auth.signInWithRedirect(provider)
