@@ -11,7 +11,7 @@ class Booking extends React.Component {
     }
 
     render() {
-        let { id, date, itemNames } = this.props
+        let { id, date, itemNames, status } = this.props
         return (
             <div className="dashboard__booking">
                 <div className="dashboard__booking--group">
@@ -19,6 +19,12 @@ class Booking extends React.Component {
                         <strong>ID</strong>
                     </div>
                     <div className="dashboard__booking--group-text id">{ id }</div>
+                </div>
+                <div className="dashboard__booking--group">
+                    <div className="dashboard__booking--group-title">
+                        <strong>STATUS</strong>
+                    </div>
+                    <div className="dashboard__booking--group-text">{ status }</div>
                 </div>
                 <div className="dashboard__booking--group">
                     <div onClick={ () => this.setState({open: !this.state.open})} className="dashboard__booking--group-title">

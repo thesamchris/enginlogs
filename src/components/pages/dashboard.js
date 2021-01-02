@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
                     return <li key={key}>{items[key].name}</li>
                 })
                 if (booking.email === email) {
-                    return <Booking key={key} id={key} date={booking.returnDate} itemNames={itemNames}/>
+                    return <Booking key={key} status={booking.status ? booking.status : 'Under Review'} id={key} date={booking.returnDate} itemNames={itemNames}/>
                 }
             })
         } else 

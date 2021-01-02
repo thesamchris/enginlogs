@@ -171,6 +171,7 @@ class App extends Component {
 			collectionTime,
 			returnTime,
 			email,
+			status: 'Under Review'
 		}
 		// days <= 7
 		let newBookingRef = this.props.firebase.bookings().push()
@@ -193,7 +194,7 @@ class App extends Component {
 			returnDate,
 			newBooking
 		)
-		this.setMessage('Successful booking! Please check your email :)')
+		// this.setMessage('Successful booking! Please check your email :)')
 		window.location = '/dashboard'
 	}
 
