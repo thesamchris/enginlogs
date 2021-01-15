@@ -45,6 +45,9 @@ class BookingRequests extends React.Component {
                     </div>
                 )
             }
+
+            return (<div></div>)
+
         })
 
         let ReviewedRequests = Object.keys(bookings ? bookings : {}).map(key => {
@@ -67,6 +70,8 @@ class BookingRequests extends React.Component {
                     </div>
                 )
             }
+            
+            return (<div></div>)
         })
         return (
             <div className="container">

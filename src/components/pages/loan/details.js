@@ -94,7 +94,7 @@ class DetailsPage extends React.Component {
 	}
 
 	generateCollectionTimingOptionsForBooking(timings = {}) {
-		let { collectionTimeStart, collectionTimeEnd, returnTimeStart, returnTimeEnd, collectionTimeSameAsReturnTime } = timings
+		let { collectionTimeStart, collectionTimeEnd } = timings
 		let difference = parseInt(collectionTimeEnd) - parseInt(collectionTimeStart)
 		let interval = 15
 		let maxIncrement = difference - (2*interval)

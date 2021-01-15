@@ -252,7 +252,7 @@ class App extends Component {
 		this.props.firebase.particularBooking(bookingId).on('value', snap => {
 			let newBooking = snap.val()
 			let { collectionDate, returnDate } = newBooking
-			this.sendConfirmationEmail(
+			return this.sendConfirmationEmail(
 				bookingId,
 				collectionDate,
 				returnDate,
@@ -277,12 +277,12 @@ class App extends Component {
 		this.props.firebase.particularBooking(bookingId).on('value', (snap) => {
 			let booking = snap.val()
 			let newBookings
-			Object.keys(booking.selectedItems).map(key => {
-				this.props.firebase.particularItemBookings(key).on('value', snap => {
+			return Object.keys(booking.selectedItems).map(key => {
+				return this.props.firebase.particularItemBookings(key).on('value', snap => {
 					let oldBookings = snap.val()
 					Object.keys(oldBookings).map(dayKey => {
 						let dayObject = oldBookings[dayKey] 
-						newBookings = {
+						return newBookings = {
 							...newBookings,
 							[dayKey]: {
 								...dayObject,
@@ -290,7 +290,7 @@ class App extends Component {
 							}
 						}
 					})
-					this.props.firebase.particularItemBookings(key).set(newBookings)
+					return this.props.firebase.particularItemBookings(key).set(newBookings)
 				})
 			})
 		})
@@ -313,6 +313,8 @@ class App extends Component {
 				break;
 			case "Delete":
 				this.deleteBooking(bookingId, message, true)
+				break;
+			default:
 				break;
 		}
 	}
