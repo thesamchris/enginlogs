@@ -193,12 +193,7 @@ class App extends Component {
 			}
 			collectionDate = new Date(newBooking.collectionDate)
 		})
-		this.sendConfirmationEmail(
-			bookingId,
-			collectionDate,
-			returnDate,
-			newBooking
-		)
+		
 		// this.setMessage('Successful booking! Please check your email :)')
 		window.location = '/dashboard'
 	}
@@ -253,6 +248,19 @@ class App extends Component {
 			status: 'Approved',
 			statusMessage: message
 		})
+
+		this.props.firebase.particularBooking(bookingId).on('value', snap => {
+			let newBooking = snap.val()
+			let { collectionDate, returnDate } = newBooking
+			this.sendConfirmationEmail(
+				bookingId,
+				collectionDate,
+				returnDate,
+				newBooking
+			)
+		})
+
+		
 	}
 
 	rejectBooking(bookingId, message) {

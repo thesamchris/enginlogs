@@ -1,5 +1,5 @@
 .dashboard__booking {
-    width: 150px;
+    width: 300px;
     min-height: 150px;
     border-radius: 24px;
     border: 1px solid var(--grey);
@@ -11,6 +11,8 @@
     max-width: 420px;
     margin: 0 auto;
     margin-top: 50px;
+    max-height: 420px;
+    overflow-y: scroll;
 }
 
 .dashboard__content section {
@@ -73,6 +75,7 @@
 
 .dashboard__booking--group {
     margin-bottom: 10px;
+    width: 200px;
 }
 
 .dashboard__booking--group-text.id {
