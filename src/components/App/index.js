@@ -252,7 +252,7 @@ class App extends Component {
 		this.props.firebase.particularBooking(bookingId).on('value', snap => {
 			let newBooking = snap.val()
 			let { collectionDate, returnDate } = newBooking
-			return axios.post('/.netlify/functions/send-approved-email', {
+			return axios.post('/.netlify/functions/build/send-approved-email', {
 				collectionDate,
 				returnDate,
 				newBooking
