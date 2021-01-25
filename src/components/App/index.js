@@ -417,6 +417,7 @@ class App extends Component {
 			}
 		).then(response => {
 			console.log(response)
+			window.location = '/dashboard'
 		})
 	}
 	sendRejectEmail(
@@ -628,6 +629,7 @@ class App extends Component {
 			}
 		).then(response => {
 			console.log(response)
+			window.location = '/dashboard'
 		})
 	}
 
@@ -822,7 +824,7 @@ class App extends Component {
 							</p>
 							<table style="width: 100%;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;mso-table-lspace: 0pt !important;mso-table-rspace: 0pt !important;border-spacing: 0 !important;border-collapse: collapse !important;table-layout: fixed !important;margin: 0 auto !important;">
 								<tr style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-									<th style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%; text-align:left">Item Loaned</th>
+									<th style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%; text-align:left"> </th>
 									<th style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%; text-align:left">Quantity</th>
 								</tr>
 								${listItems}
@@ -843,6 +845,7 @@ class App extends Component {
 			}
 		).then(response => {
 			console.log(response)
+			window.location = '/dashboard'
 		})
 	}
 
@@ -1038,7 +1041,6 @@ class App extends Component {
 										bookings={bookings}
 										authUser={authUser}
 									/>
-									<button onClick={this.sendContactEmail}>hi</button>
 								</div>
 							)}
 						/>
