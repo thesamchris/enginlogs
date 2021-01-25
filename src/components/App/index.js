@@ -417,7 +417,6 @@ class App extends Component {
 			}
 		).then(response => {
 			console.log(response)
-			window.location = '/dashboard'
 		})
 	}
 	sendRejectEmail(
@@ -629,7 +628,6 @@ class App extends Component {
 			}
 		).then(response => {
 			console.log(response)
-			window.location = '/dashboard'
 		})
 	}
 
