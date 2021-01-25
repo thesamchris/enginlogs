@@ -59,6 +59,7 @@ class App extends Component {
 		this.approveBooking = this.approveBooking.bind(this)
 		this.rejectBooking = this.rejectBooking.bind(this)
 		this.deleteBooking = this.deleteBooking.bind(this)
+		this.sendContactEmail = this.sendContactEmail.bind(this)
 	}
 
 	updateCollectionAndReturnTimings(collectionTimeStart, collectionTimeEnd, returnTimeStart, returnTimeEnd, collectionTimeSameAsReturnTime) {
@@ -196,6 +197,24 @@ class App extends Component {
 		
 		this.setMessage('Successful booking! Please check your email :)')
 		window.location = '/dashboard'
+	}
+
+	sendContactEmail() {
+		let message = "This is a test message"
+		let contactName = "Howard"
+		let contactEmail = this.state.authUser.email
+		let subject = "Testing"
+		axios.post(
+			'/.netlify/functions/send-contact-email',
+			{
+				message,
+				contactName,
+				contactEmail,
+				subject
+			}
+		).then(response => {
+			console.log(response)
+		})
 	}
 
 	async sendConfirmationEmail(
@@ -379,12 +398,15 @@ class App extends Component {
 						<Route
 							path="/dashboard"
 							render={(props) => (
-								<DashboardPage
-									{...props}
-									items={items}
-									bookings={bookings}
-									authUser={authUser}
-								/>
+								<div>
+									<DashboardPage
+										{...props}
+										items={items}
+										bookings={bookings}
+										authUser={authUser}
+									/>
+									<button onClick={this.sendContactEmail}>hi</button>
+								</div>
 							)}
 						/>
 						<Route
