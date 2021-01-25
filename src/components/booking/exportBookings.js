@@ -1,6 +1,7 @@
 import React from 'react'
 import { withFirebase } from '../Firebase/index'
 import './export.css'
+import withAuthorization from '../App/withAuthorization'
 
 class ExportBookings extends React.Component {
 	constructor() {
@@ -129,4 +130,6 @@ class ExportBookings extends React.Component {
 	}
 }
 
-export default withFirebase(ExportBookings)
+const condition = (authUser) => (authUser.email == 'logistics@enginclub.com' || authUser.email === 'hellosamchris@gmail.com')
+
+export default withAuthorization(condition, '/dashboard')(withFirebase(ExportBookings))

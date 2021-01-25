@@ -1,4 +1,5 @@
 import React from 'react'
+import withAuthorization from '../App/withAuthorization'
 
 class BookingRequests extends React.Component {
     constructor() {
@@ -90,4 +91,6 @@ class BookingRequests extends React.Component {
     }
 }
 
-export default BookingRequests
+const condition = (authUser) => (authUser.email == 'logistics@enginclub.com' || authUser.email === 'hellosamchris@gmail.com')
+
+export default withAuthorization(condition, '/dashboard')(BookingRequests)
