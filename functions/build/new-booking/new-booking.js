@@ -33,6 +33,7 @@ exports.handler = async (event) => {
   const mailgunData = {
     cc: 'logistics@enginclub.com',
     from: 'logistics@enginclub.com',
+    to: data.email,
     subject: `Engin Club: Booking Confirmation for ${data.collectionDate}`,
     text: `Engin Club Logistics: ${data.bookingId}`,
     html: `<!DOCTYPE html>
