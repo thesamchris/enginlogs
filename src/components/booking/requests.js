@@ -26,7 +26,7 @@ class BookingRequests extends React.Component {
                     return <li key={key} className="list-group-item">{items[key].name}</li>
                 })
                 return (
-                    <div key={key} className="card col-sm">
+                    <div key={key} className="card col-sm-5 mx-1 mb-3">
                         <div className="card-header">
                             <h5 className="card-title">{booking.email}</h5>
                         </div>
