@@ -18,20 +18,19 @@ class Dashboard extends React.Component {
     render() {
         let { authUser, bookings, items } = this.props
         let email = authUser ? authUser.email : 'loading@loading.com'
-        let userBookings
+        let userBookings = []
         if (bookings) {
             // eslint-disable-next-line
-            userBookings = Object.keys(bookings).map(key => {
+            Object.keys(bookings).forEach(key => {
                 let booking = bookings[key] 
-                let itemNames = Object.keys(booking.selectedItems).map(key => {
-                    return <li key={key}>{items[key].name}</li>
-                })
                 if (booking.email === email) {
-                    return <Booking key={key} status={booking.status ? booking.status : 'Under Review'} id={key} date={booking.returnDate} itemNames={itemNames}/>
+                    let itemNames = Object.keys(booking.selectedItems).map(key => {
+                        return <li key={key}>{items[key].name}</li>
+                    })
+                    userBookings.push(<Booking key={key} status={booking.status ? booking.status : 'Under Review'} id={key} date={booking.returnDate} itemNames={itemNames}/>)
                 }
             })
-        } else 
-            userBookings = 'No bookings yet.'
+        }
         return (
 					<div className="dashboard__container user__container">
 						<div className="user__logo"></div>
@@ -43,7 +42,11 @@ class Dashboard extends React.Component {
 							<section>
 								<span className="dashboard__title">BOOKINGS</span>
 								<div className="dashboard__bookings">
-									{userBookings ? userBookings.reverse() : 'no bookings'}
+									{userBookings.length ? userBookings.reverse() : (
+                                        <div>
+                                                No bookings yet. Visit <Link to='/loan'>loan</Link> to make a booking.
+                                        </div>
+                                    )}
 								</div>
 							</section>
 							<section>
