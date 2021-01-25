@@ -8,7 +8,7 @@ exports.handler = async (event) => {
   }
 
   const data = JSON.parse(event.body)
-  if (!data.message || !data.contactName || !data.contactEmail || !data.subject || !data.message) {
+  if (!data.html || !data.contactName || !data.contactEmail || !data.subject) {
     return { statusCode: 422, body: 'Name, email, and message are required.' }
   }
 
@@ -17,7 +17,7 @@ exports.handler = async (event) => {
     to: data.contactEmail,
     'h:Reply-To': CONTACT_TO_EMAIL_ADDRESS,
     subject: data.subject,
-    text: data.message
+    html: data.html
   }
 
   return mailgun.messages().send(mailgunData).then(() => ({
