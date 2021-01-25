@@ -194,7 +194,7 @@ class App extends Component {
 			collectionDate = new Date(newBooking.collectionDate)
 		})
 		
-		// this.setMessage('Successful booking! Please check your email :)')
+		this.setMessage('Successful booking! Please check your email :)')
 		window.location = '/dashboard'
 	}
 
@@ -216,7 +216,7 @@ class App extends Component {
 				}
 			})
 			const response = await axios.post(
-				'/.netlify/functions/send-confirmation-email',
+				'/.netlify/functions/new-booking',
 				{
 					collectionDate: collectionDate.toDateString(),
 					returnDate: returnDate.toDateString(),

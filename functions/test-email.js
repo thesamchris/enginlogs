@@ -1,9 +1,10 @@
 const mailgun = require('mailgun-js');
+require('dotenv').config();
 
 exports.handler = function (event, context, callback) {
     const mg = mailgun({
-        apiKey: proccess.env.MAILGUN_API_KEY,
-        domain: process.env.MAILGUN_DOMAIN,
+        apiKey: MAILGUN_API_KEY,
+        domain: MAILGUN_DOMAIN,
     });
 
     const data = {

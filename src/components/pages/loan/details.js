@@ -14,8 +14,8 @@ class DetailsPage extends React.Component {
 			email: '',
 			error: false,
 			message: '',
-			collectionTime: '12:00',
-			returnTime: '12:00',
+			collectionTime: '',
+			returnTime: '',
 		}
 		this.validateDateRange = this.validateDateRange.bind(this)
 		this.updateState = this.updateState.bind(this)
