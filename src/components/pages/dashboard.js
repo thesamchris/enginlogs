@@ -34,7 +34,7 @@ class Dashboard extends React.Component {
         return (
 					<div className="dashboard__container user__container">
 						<div className="user__logo"></div>
-						<div className="tagline">welcome back!</div>
+						<div className="tagline">welcome back to elogs!</div>
 						<p className="text-center">
 							<strong>{authUser ? authUser.email : ''}</strong>
 						</p>
