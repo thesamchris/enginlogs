@@ -91,6 +91,6 @@ class BookingRequests extends React.Component {
     }
 }
 
-const condition = (authUser) => (authUser.email === 'logistics@enginclub.com' || authUser.email === 'hellosamchris@gmail.com')
+const condition = (authUser) => (authUser.email === 'logistics@enginclub.com' || authUser.email === 'hellosamchris@gmail.com' || authUser.email === 'elogs@enginclub.com')
 
 export default withAuthorization(condition, '/dashboard')(BookingRequests)

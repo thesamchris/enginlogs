@@ -15,6 +15,6 @@ const AddInitialContainer = ({ setMessage }) => (
     </FirebaseContext.Consumer>
 )
 
-const condition = (authUser) => (authUser.email === 'logistics@enginclub.com' || authUser.email === 'hellosamchris@gmail.com')
+const condition = (authUser) => (authUser.email === 'logistics@enginclub.com' || authUser.email === 'hellosamchris@gmail.com' || authUser.email === 'elogs@gmail.com')
 
 export default withAuthorization(condition, '/dashboard')(AddInitialContainer)
