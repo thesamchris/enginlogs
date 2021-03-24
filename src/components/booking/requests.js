@@ -24,7 +24,7 @@ class BookingRequests extends React.Component {
 
             if (booking.status === 'Under Review' || booking.status === '') {
                 let itemNames = Object.keys(booking.selectedItems).map(key => {
-                    return <li key={key} className="list-group-item">{items[key].name}</li>
+                    return <li key={key} className="list-group-item">{items[key].name} ({booking.selectedItems[key]})</li>
                 })
                 return (
                     <div key={key} className="card col-sm-5 mx-1 mb-3">
