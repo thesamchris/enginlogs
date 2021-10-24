@@ -15,7 +15,7 @@ exports.handler = async (event) => {
   const mailgunData = {
     from: FROM_EMAIL_ADDRESS,
     to: data.contactEmail,
-    cc: 'e0426202@u.nus.edu',
+    cc: 'e0543470@u.nus.edu',
     'h:Reply-To': CONTACT_TO_EMAIL_ADDRESS,
     subject: data.subject,
     html: data.html
